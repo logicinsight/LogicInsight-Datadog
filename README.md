@@ -1,5 +1,3 @@
-# README: Logic Insight Public Datadog Dashboards
-
 ## Overview  
 The **Logic Insight Public Datadog Dashboards** are designed to provide comprehensive monitoring and visualization for Logic Insight LogicApp. These dashboards deliver near real-time insights into performance, usage, and error metrics, enabling users to efficiently manage and troubleshoot their Nutanix workflows.  
 
