@@ -68,7 +68,7 @@ Nutanix systems generate extensive telemetry data, enabling real-time insights i
 - **Performance Alerts**: Notifications for high latency or throughput issues.  
 
 ## Maintenance  
-- Regularly update the dashboards to include new metrics or workflows as Logic Apps evolve.  
+- Regularly update the dashboards to include new metrics or workflows as LogicApp evolve.  
 - Periodically review alert thresholds to align with changing workload patterns.  
 
 ## Support  
