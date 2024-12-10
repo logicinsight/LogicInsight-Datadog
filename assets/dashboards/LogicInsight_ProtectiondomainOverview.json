@@ -1,0 +1,665 @@
+{
+  "title": "Protection domain Overview",
+  "description": "[[suggested_dashboards]]",
+  "widgets": [
+    {
+      "id": 1076936579070902,
+      "layout": {
+        "x": 0,
+        "y": 15,
+        "width": 51,
+        "height": 17
+      },
+      "definition": {
+        "title": "PD Replication in (Mega bit per second)",
+        "title_size": "13",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "Mbps"
+                  }
+                },
+                "formula": "query1 / 1000"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_vm_replication_transmitted_bandwidth_kBps{$cluster_name, $vm_name, $pd_name} by {pd_vm_protection_domain_name}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 6325465134634990,
+      "layout": {
+        "x": 52,
+        "y": 0,
+        "width": 46,
+        "height": 32
+      },
+      "definition": {
+        "title": "Total VMs replicas running at this time",
+        "title_size": "13",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "requests": [
+          {
+            "response_format": "scalar",
+            "formulas": [
+              {
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_ongoing_replication_count{$cluster_name} by {pd_vm_name,pd_vm_protection_domain_name}",
+                "aggregator": "last"
+              }
+            ],
+            "style": {
+              "palette": "classic"
+            },
+            "sort": {
+              "count": 500,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "sunburst",
+        "legend": {
+          "type": "none"
+        }
+      }
+    },
+    {
+      "id": 4185156425191370,
+      "layout": {
+        "x": 99,
+        "y": 0,
+        "width": 37,
+        "height": 32
+      },
+      "definition": {
+        "title": "Total storage transmitted ",
+        "title_size": "13",
+        "title_align": "left",
+        "show_legend": true,
+        "legend_layout": "auto",
+        "legend_columns": [
+          "avg",
+          "min",
+          "max",
+          "value",
+          "sum"
+        ],
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 5
+        },
+        "type": "timeseries",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query1"
+              }
+            ],
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_vm_replication_total_transmitted_bytes{$cluster_name, $vm_name, $pd_name} by {pd_vm_protection_domain_name}"
+              }
+            ],
+            "response_format": "timeseries",
+            "style": {
+              "palette": "dog_classic",
+              "order_by": "values",
+              "line_type": "solid",
+              "line_width": "normal"
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    },
+    {
+      "id": 5672168652369572,
+      "layout": {
+        "x": 0.08333333333333333,
+        "y": 33,
+        "width": 73,
+        "height": 27
+      },
+      "definition": {
+        "title": " RUNNING",
+        "title_size": "13",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_ongoing_replication_count{$cluster_name, $vm_name, $pd_name} by {pd_vm_name,pd_vm_protection_domain_name,cluster_name}",
+                "aggregator": "avg"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": ""
+                  },
+                  "palette": "white_on_green"
+                }
+              ],
+              [],
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "false"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "NO"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "true"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "YES"
+                  }
+                }
+              ]
+            ],
+            "sort": {
+              "count": 500,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            },
+            "formulas": [
+              {
+                "conditional_formats": [
+                  {
+                    "comparator": "=",
+                    "value": 1,
+                    "palette": "green_on_white"
+                  }
+                ],
+                "cell_display_mode": "bar",
+                "alias": "REPLICATION",
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "[RUNNING]"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "always"
+      }
+    },
+    {
+      "id": 7040511104511730,
+      "layout": {
+        "x": 0,
+        "y": 61,
+        "width": 73,
+        "height": 31
+      },
+      "definition": {
+        "title": "PENDING",
+        "title_size": "13",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_vm_pending{$vm_name, $pd_name, $cluster_name} by {pd_vm_name,pd_vm_protection_domain_name,pd_vm_remote_site_name,pd_vm_current_replicating_snapshot_id,pd_vm_last_successful_replication_snapshot_id}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": ""
+                  },
+                  "palette": "white_on_green"
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "0"
+                  },
+                  "palette": "white_on_green"
+                }
+              ],
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "false"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "NO"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "true"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "YES"
+                  }
+                }
+              ]
+            ],
+            "sort": {
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "pd_vm_current_replicating_snapshot_id",
+                  "order": "desc"
+                }
+              ],
+              "count": 500
+            },
+            "formulas": [
+              {
+                "conditional_formats": [
+                  {
+                    "comparator": "=",
+                    "value": 1,
+                    "palette": "red_on_white"
+                  },
+                  {
+                    "comparator": "=",
+                    "value": 0,
+                    "palette": "green_on_white"
+                  }
+                ],
+                "cell_display_mode": "bar",
+                "alias": "REPLICATION",
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "PENDING"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "always"
+      }
+    },
+    {
+      "id": 7770683457413856,
+      "layout": {
+        "x": 74,
+        "y": 61,
+        "width": 115,
+        "height": 31
+      },
+      "definition": {
+        "title": "HISTORY",
+        "title_size": "13",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "hour",
+          "value": 1
+        },
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.pd_none_replication_count{$cluster_name, $vm_name, $pd_name} by {pd_vm_name,pd_vm_protection_domain_name,pd_vm_remote_site_name,pd_vm_last_successful_replication_snapshot_id,pd_vm_last_replication_start_time_in_usecs,pd_vm_last_replication_end_time_in_usecs}",
+                "aggregator": "avg"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": ""
+                  },
+                  "palette": "white_on_green"
+                }
+              ]
+            ],
+            "sort": {
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "pd_vm_last_successful_replication_snapshot_id",
+                  "order": "desc"
+                }
+              ],
+              "count": 500
+            },
+            "formulas": [
+              {
+                "conditional_formats": [
+                  {
+                    "comparator": ">",
+                    "value": 1,
+                    "palette": "green_on_white"
+                  }
+                ],
+                "cell_display_mode": "bar",
+                "alias": "REPLICA DURATION",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "second"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "always"
+      }
+    },
+    {
+      "id": 5619473892228832,
+      "layout": {
+        "x": 74,
+        "y": 33,
+        "width": 62,
+        "height": 27
+      },
+      "definition": {
+        "type": "manage_status",
+        "display_format": "countsAndList",
+        "color_preference": "text",
+        "hide_zero_counts": true,
+        "show_status": true,
+        "last_triggered_format": "relative",
+        "query": "NOT group_status:ok tag:(PD_PENDING) AND group:$cluster_name",
+        "sort": "triggered,desc",
+        "count": 50,
+        "start": 0,
+        "summary_type": "groups",
+        "show_priority": true,
+        "show_last_triggered": true
+      }
+    },
+    {
+      "id": 1837583931790336,
+      "layout": {
+        "x": 137,
+        "y": 0,
+        "width": 52,
+        "height": 60
+      },
+      "definition": {
+        "title": "VMs without protection",
+        "title_size": "13",
+        "title_align": "left",
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.vms_unprotected_name{$cluster_name} by {vm_name,vm_ip_1,vm_powerstate,cluster_name}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "on"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "ON"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "off"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "OFF"
+                  }
+                }
+              ],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "on"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "ON"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "off"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "OFF"
+                  }
+                }
+              ]
+            ],
+            "sort": {
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "vm_name",
+                  "order": "asc"
+                }
+              ],
+              "count": 500
+            },
+            "formulas": [
+              {
+                "alias": "UNPROTECTED",
+                "cell_display_mode": "number",
+                "conditional_formats": [
+                  {
+                    "comparator": "=",
+                    "value": 0,
+                    "palette": "red_on_white"
+                  }
+                ],
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "auto"
+      }
+    },
+    {
+      "id": 4643441248067904,
+      "layout": {
+        "x": 190,
+        "y": 0,
+        "width": 73,
+        "height": 90
+      },
+      "definition": {
+        "title": "Replications events",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "week",
+          "value": 1
+        },
+        "requests": [
+          {
+            "response_format": "event_list",
+            "query": {
+              "query_string": "classification:dr cluster_name:$cluster_name.value",
+              "data_source": "event_stream",
+              "event_size": "l"
+            },
+            "columns": []
+          }
+        ],
+        "type": "list_stream"
+      }
+    },
+    {
+      "id": 5825683748138460,
+      "layout": {
+        "x": 0,
+        "y": 1.0154865406177662e-7,
+        "width": 51,
+        "height": 14
+      },
+      "definition": {
+        "type": "image",
+        "url": "https://i.postimg.cc/0y6xW0n9/Infinity.png",
+        "sizing": "fill",
+        "has_background": true,
+        "has_border": true,
+        "vertical_align": "center",
+        "horizontal_align": "center"
+      }
+    }
+  ],
+  "template_variables": [
+    {
+      "name": "cluster_name",
+      "prefix": "cluster_name",
+      "available_values": [],
+      "default": ""
+    },
+    {
+      "name": "vm_name",
+      "prefix": "pd_vm_name",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "pd_name",
+      "prefix": "pd_vm_protection_domain_name",
+      "available_values": [],
+      "default": "*"
+    }
+  ],
+  "layout_type": "free",
+  "notify_list": []
+}

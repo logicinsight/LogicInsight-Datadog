@@ -1,0 +1,228 @@
+{
+  "title": "VMs Inventory",
+  "description": null,
+  "widgets": [
+    {
+      "id": 6630945019195542,
+      "layout": {
+        "x": 1,
+        "y": 0,
+        "width": 145,
+        "height": 119
+      },
+      "definition": {
+        "title": "VMs Inventory",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "avg:LogicInsightPE.vms_numVCpus{$cluster_name, $host_name, $vm_pd, $vm_powerstate} by {cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query2",
+                "query": "avg:LogicInsightPE.vms_memoryCapacityInBytes{$cluster_name, $host_name, $vm_pd, $vm_powerstate} by {cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query3",
+                "query": "avg:LogicInsightPE.vms_diskCapacityInBytes{$cluster_name, $host_name, $vm_pd, $vm_powerstate} by {cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query4",
+                "query": "avg:LogicInsightPE.vms_numNetworkAdapters{$cluster_name, $host_name, $vm_pd, $vm_powerstate} by {cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query5",
+                "query": "avg:LogicInsightPE.vms_ngt_enabled{$cluster_name, $host_name, $vm_pd, $vm_powerstate} by {cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "on"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "ON"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "off"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "OFF"
+                  }
+                }
+              ],
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "entity_centric"
+                  },
+                  "palette": "black_on_light_green",
+                  "replace": {
+                    "type": "all",
+                    "with": "PROTECTION POLICY"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "unprotected"
+                  },
+                  "palette": "black_on_light_red",
+                  "replace": {
+                    "type": "all",
+                    "with": "UNPROTECTED"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "legacy"
+                  },
+                  "palette": "black_on_light_green",
+                  "replace": {
+                    "type": "all",
+                    "with": "PROTECTION DOMAIN"
+                  }
+                }
+              ]
+            ],
+            "sort": {
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "vm_name",
+                  "order": "asc"
+                }
+              ],
+              "count": 500
+            },
+            "formulas": [
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_VCPU",
+                "formula": "query1"
+              },
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_MEMORY",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query2"
+              },
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_DISK",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query3"
+              },
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_ADAPTERS",
+                "formula": "query4"
+              },
+              {
+                "conditional_formats": [
+                  {
+                    "comparator": "=",
+                    "value": 0,
+                    "palette": "black_on_light_yellow"
+                  },
+                  {
+                    "comparator": "=",
+                    "value": 1,
+                    "palette": "black_on_light_green"
+                  }
+                ],
+                "cell_display_mode": "number",
+                "alias": "VM_NGT",
+                "formula": "query5"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "always",
+        "custom_links": [
+          {
+            "label": "VMs Protection Domain",
+            "link": "https://app.datadoghq.com/dashboard/7n9-nrf-66w/protection-domain?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
+          },
+          {
+            "label": "VMs single view",
+            "link": "https://app.datadoghq.com/dashboard/qx6-yn9-hvc/vms-single-view?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{$cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [
+    {
+      "name": "cluster_name",
+      "prefix": "cluster_name",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "host_name",
+      "prefix": "host_name",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "vm_pd",
+      "prefix": "vm_pd",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "vm_powerstate",
+      "prefix": "vm_powerstate",
+      "available_values": [],
+      "default": "*"
+    }
+  ],
+  "layout_type": "free",
+  "notify_list": []
+}
