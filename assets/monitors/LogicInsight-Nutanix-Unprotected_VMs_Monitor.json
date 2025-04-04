@@ -1,6 +1,6 @@
 {
 	"id": 157580134,
-	"name": "Unprotected VMs Monitor",
+	"name": "LogicInsight - Nutanix Unprotected VMs Monitor",
 	"type": "query alert",
 	"query": "avg(last_5m):avg:logicinsight.pe.vms_dp_unprotected{source:nutanix_clusters} by {cluster_name} > 100",
 	"message": "Unprotected VMs Monitor:\n\nValidate cluster {{cluster_name}} \n\n{{#is_alert}} \nStatus: There are virtual machines (VMs) without Protection Domains or Protection Policies.\n\nTo resolve this issue, follow these corrective actions:\n  1. Identify the unprotected VMs in Prism Central / Prism Element.\n  2. Ensure that each VM is assigned to a Protection Domain or a Protection Policy.\n  3. Create a Protection Domain and configure backup schedules for critical VMs.\n  4. Verify that replication policies are set up correctly and operational.\n  5. Review the recovery point objectives (RPO) and ensure they are being met.\n  \n{{/is_alert}}\n\n{{#is_recovery}} \nAll VMs are now properly protected. Great job!\n{{/is_recovery}}",
