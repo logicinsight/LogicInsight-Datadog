@@ -5,7 +5,7 @@
 	"query": "events(\"status:info\").rollup(\"count\").by(\"message,cluster_name\").last(\"5m\") > 5000",
 	"message": "review",
 	"tags": [
-		"LOGICAPP_VERSION_2025.04.02.1800"
+		"LOGICAPP_VERSION_2025.04.04.1626"
 	],
 	"options": {
 		"thresholds": {
