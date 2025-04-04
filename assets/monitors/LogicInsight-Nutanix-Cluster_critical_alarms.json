@@ -1,6 +1,6 @@
 {
 	"id": 168342051,
-	"name": "Cluster critical alarms",
+	"name": "LogicInsight - Nutanix Cluster critical alarms",
 	"type": "event-v2 alert",
 	"query": "events(\"status:error\").rollup(\"count\").by(\"message,cluster_name\").last(\"5m\") > 0",
 	"message": "Review",
