@@ -1,0 +1,21 @@
+{
+	"id": 157584878,
+	"name": "Cluster Resiliency Monitor",
+	"type": "query alert",
+	"query": "avg(last_5m):(avg:logicinsight.pe.cluster_usage_stats_storage.usage_bytes{source:nutanix_clusters} by {cluster_name} / avg:logicinsight.pe.cluster_data_resiliency{source:nutanix_clusters} by {cluster_name}) * 100 > 90",
+	"message": "Cluster Resiliency Monitor: \n\nValidate cluster {{cluster_name}}\n\n{{#is_alert}} \nResiliency status: The cluster's resiliency is in a critical state.\n\nTo resolve this issue, please follow these corrective actions:\n  1. Ensure that there is enough storage capacity and that disks are not nearing full usage.\n  2. Check for any alerts related to Replication Factor (RF) and resolve them.\n  3. Ensure that cluster services like Prism and Stargate are running and healthy.\n  4. If using high availability (HA), make sure that HA settings are properly configured and operational.\n  \n{{/is_alert}}\n\n{{#is_recovery}} \nResiliency has returned to normal. Well done!!\n{{/is_recovery}}",
+	"tags": [],
+	"options": {
+		"thresholds": {
+			"critical": 90,
+			"warning": 75
+		},
+		"notify_audit": false,
+		"on_missing_data": "default",
+		"include_tags": true,
+		"new_group_delay": 60,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	},
+	"priority": 1
+}
