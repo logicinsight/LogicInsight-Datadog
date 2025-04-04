@@ -1,0 +1,21 @@
+{
+	"id": 157584756,
+	"name": "Nutanix Pending VM Detected",
+	"type": "query alert",
+	"query": "avg(last_5m):avg:logicinsight.pe.pd_vm_pending{source:nutanix_clusters} by {pd_vm_name,cluster_name} == 1",
+	"message": "{{#is_alert}} \nAlert: One or more Nutanix VMs are pending!\n\nA pending virtual machine has been detected on the Nutanix cluster. Please check for potential network-related issues that may be causing slowness or disconnection between sites.\n\n{{pd_vm_name}}\n\nSteps to resolve:\n1. Check the pending VM status in the Nutanix management console.\n2. Validate network performance, slowness, or disconnections between sites that may affect Nutanix operations.\n\nFor immediate resolution, please check the VM management interface or logs for details.\n\n{{/is_alert}} \n\n{{#is_recovery}} \nRecovery: All Nutanix VMs pendings are back to normal!\n\nNo pending VMs replication are detected at the moment. All systems are operational.\n\n{{/is_recovery}}\n\nNotify:",
+	"tags": [
+		"PD_PENDING",
+		"LOGICAPP_VERSION_2025.04.02.1800"
+	],
+	"options": {
+		"thresholds": {
+			"critical": 1
+		},
+		"notify_audit": false,
+		"on_missing_data": "default",
+		"include_tags": true,
+		"new_group_delay": 60
+	},
+	"priority": 2
+}
