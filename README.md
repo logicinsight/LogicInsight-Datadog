@@ -52,30 +52,142 @@ There are also two ways to upload the LogicApp qcow to **Prism Element** or **Pr
 - Upload Image through the image service on **Prism Element** or **Prism Central**
 - Upload through a local file that was downloaded to a local computer.
 
-![Uploaded Image](screenshots/UploadAWS.png)
-
 LogicApp can be downloaded from AWS directly [download link](https://logicappupdate.s3.us-east-1.amazonaws.com/LogicAPP/latest.qcow2).
 
-### 🚀 Initial Configuration
+---
 
-1. **Create a VM** on either **Prism Central** or **Prism Element**.
-2. **Name the VM** — we recommend **LogicInsight Appliance**, but you can follow your own naming standards.
-3. **Add a description** — suggested: **LogicInsight Nutanix Monitoring Appliance**.
-4. **Set the timezone** to either **UTC** or local cluster time — we suggest keeping it at **UTC**.
-5. **Minimum CPU:** 4 vCPUs.
-6. **Minimum cores per vCPU:** 1.
-7. **Minimum RAM:** 4 GB.
-8. **Boot Configuration:** Set to **Legacy BIOS**.
-9. **Remove the CD-ROM** from the VM.
-10. **Add a New Disk**:
-    - Clone from **Image Service** and select the appliance image that was previously downloaded or uploaded.
-11. **Add a Network Adapter**:
-    > ℹ️ LogicInsight can run on any subnet, as long as it can communicate with **Prism Central** and **Prism Element** on port **9440**.  
-    > *(Optional: For IPMI integration, ensure connectivity on port **443** to the IPMI hosts.)*
-12. **Save and power on** the VM.
+## ⚙️ Initial Configuration – LogicInsight Appliance
 
-### 👾 Post Configuration
+Follow these steps to deploy the **LogicInsight Appliance** on your Nutanix environment:
 
+---
+
+### 1. 🖥️ Create the VM  
+- Deploy on either **Prism Central** or **Prism Element**.
+
+---
+
+### 2. 🏷️ Name the VM  
+- Suggested name: **LogicInsight Appliance**  
+- (You may use your organization’s naming convention.)
+
+---
+
+### 3. 📝 Add a Description  
+- Recommended:  
+  ```
+  LogicInsight Nutanix Monitoring Appliance
+  ```
+
+---
+
+### 4. 🌐 Set the Timezone  
+- Use **UTC** (recommended) or your local cluster time.
+
+---
+
+### 5. 🧠 Resource Requirements  
+- **Minimum CPU:** 4 vCPUs  
+- **Cores per vCPU:** At least 1  
+- **Minimum RAM:** 4 GB
+
+---
+
+### 6. 💾 Boot Configuration  
+- Set to **Legacy BIOS**
+
+---
+
+### 7. 📀 Remove CD-ROM  
+- Detach the CD-ROM device from the VM.
+
+---
+
+### 8. 📦 Add a New Disk  
+- Clone from **Image Service**  
+- Select the LogicInsight appliance image (downloaded or uploaded previously)
+
+---
+
+### 9. 🌐 Add a Network Adapter  
+> ℹ️ The appliance can be on any subnet, as long as it can reach:  
+> - **Prism Central** and **Prism Element** on **port 9440**  
+> - *(Optional)* IPMI systems via **port 443**
+
+---
+
+### 10. 🔋 Save & Power On  
+- Finalize configuration and power on the virtual machine.
+
+## 🚀 LogicApp Appliance Deployment Guide
+
+### 1. 🖥️ Open Console  
+Access the console of the newly deployed **LogicApp Appliance**.
+
+---
+
+### 2. 🌐 Network Configuration  
+- If **DHCP** is enabled, the appliance will boot directly to the login screen.  
+- If **DHCP is disabled**, expect a **2-minute timeout** before login appears.
+
+---
+
+### 3. 🔐 Login  
+Login to the appliance with the following credentials:  
+- **Username:** `logicapp`  
+- **Password:** `Support/4u`
+
+---
+
+### 4. ⚙️ First-Time Setup  
+Follow the interactive prompts to configure **network settings** and complete the **initial setup**.
+
+---
+
+### 5. 🌍 Web UI Access  
+- Use a browser with access to the appliance’s subnet.  
+- Navigate to:  
+  ```
+  https://<ip-address/hostname>
+  ```  
+- **Login credentials:**  
+  - **Username:** `admin`  
+  - **Password:** `Support4u`  
+- Enter a valid **license key**.  
+  > ℹ️ License keys can be obtained by contacting [LogicApp Support](https://logicinsight.io).
+
+---
+
+### 6. ➕ Adding Nutanix Clusters  
+To integrate Nutanix clusters with LogicApp for **DataDog monitoring**, choose one of the following:
+
+#### • Prism Central (Recommended for multiple clusters)  
+> ℹ️ Best suited for environments with multiple clusters.
+
+#### • Prism Element (Recommended for single clusters)  
+> ℹ️ Ideal for monitoring individual clusters.
+
+- Follow on-screen prompts to complete the cluster setup.  
+- Look for ✅ **green checkmarks** for:
+  - DataDog
+  - License
+  - Subscription
+
+---
+
+### 7. 📊 Load Dashboards & Monitors  
+In the top-right of the Web UI, click:  
+**Deploy Dashboards/Monitors** to enable built-in observability.
+
+---
+
+### 8. 📈 View in DataDog  
+You're all set!  
+Access your new **dashboards and monitors** directly in **DataDog**.
+
+---
+
+Let me know if you want this styled for PDF, web docs, or converted to HTML/React!
 
 ## Dashboards Overview  
 The **Logic Insight Public Datadog Dashboards** are designed to provide comprehensive monitoring and visualization for Logic Insight LogicApp. These dashboards deliver near-time insights into performance, usage, and error metrics, enabling users to efficiently manage and troubleshoot their Nutanix workflows. 
