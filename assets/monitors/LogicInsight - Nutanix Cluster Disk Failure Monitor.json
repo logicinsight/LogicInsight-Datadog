@@ -1,0 +1,23 @@
+{
+	"id": 168700358,
+	"name": "LogicInsight - Nutanix Cluster Disk Failure Monitor",
+	"type": "query alert",
+	"query": "max(last_5m):avg:logicinsight.pe.disk_bad{source:nutanix_clusters} by {ntnx_cluster_name,disk_serial_number,disk_status} > 1",
+	"message": "{{#is_alert}}\n\nAlert status: One or more disks in the cluster are in a failed state.\n\nThis condition can compromise cluster resiliency and data protection mechanisms. Immediate attention is required.\n\nRecommended actions:\n\n1. Log in to Prism and identify the failed disk(s) under Hardware > Disks.\n2. Validate whether the disk failure is transient (e.g., connectivity) or permanent.\n3. If the failure is confirmed, replace the disk following Nutanix hardware replacement procedures.\n4. Monitor the Curator and Cassandra tasks to ensure data rebalancing is progressing correctly.\n5. If multiple disks are impacted, assess the risk to redundancy and consider escalating to Nutanix Support.\n\n{{/is_alert}}\n\n{{#is_recovery}}\nRecovery notice: All disks in cluster {{cluster_name}} are now in a healthy state.\nThe cluster resiliency is back to normal. Great job on the quick recovery!\n{{/is_recovery}}",
+	"tags": [
+		"LOGICAPP_VERSION_2025.04.08.2326",
+		"NTNX_CRITICAL"
+	],
+	"options": {
+		"thresholds": {
+			"critical": 1
+		},
+		"notify_audit": false,
+		"on_missing_data": "resolve",
+		"include_tags": true,
+		"new_group_delay": 60,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	},
+	"priority": 1
+}

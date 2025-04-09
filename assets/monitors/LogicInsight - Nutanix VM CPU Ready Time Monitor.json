@@ -1,0 +1,25 @@
+{
+	"id": 168697400,
+	"name": "LogicInsight - Nutanix VM CPU Ready Time Monitor",
+	"type": "query alert",
+	"query": "avg(last_2m):avg:logicinsight.pe.vms_stats_hypervisor.cpu_ready_time_ppm{source:nutanix_clusters} by {vm_name,ntnx_cluster_name} / 10000 > 5",
+	"message": "{{#is_alert}}\n\nAlert status: One or more virtual machines are experiencing high CPU Ready Time.\nThis indicates that the virtual CPUs are spending too much time waiting to be scheduled on physical CPUs, which can severely degrade performance.\n\nRecommended actions in Nutanix AHV environments:\n\n1. Check the number of vCPUs assigned to affected VMs. Avoid over-provisioning — use only what is needed.\n2. Verify host CPU utilization in Prism. If hosts are overcommitted, consider rebalancing VMs across hosts.\n3. Avoid CPU affinity rules unless strictly necessary, as they limit scheduling flexibility.\n4. Upgrade cluster resources (add hosts or improve CPU capacity) if the environment is consistently under pressure.\n5. Look for other noisy neighbors or high-resource consumers that might be starving other VMs.\n\n{{/is_alert}}\n\n{{#is_recovery}}\nRecovery notice: CPU Ready Time has returned to acceptable levels.\nKeep monitoring the VM(s) in {{cluster_name}} to ensure stability.\nGreat job!\n{{/is_recovery}}",
+	"tags": [
+		"LOGICAPP_VERSION_2025.04.08.2326",
+		"NTNX_CRITICAL",
+		"NTNX_WARNING"
+	],
+	"options": {
+		"thresholds": {
+			"critical": 5,
+			"warning": 2.5
+		},
+		"notify_audit": false,
+		"on_missing_data": "resolve",
+		"include_tags": true,
+		"new_group_delay": 60,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	},
+	"priority": 2
+}

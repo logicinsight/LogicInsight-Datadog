@@ -1,0 +1,23 @@
+{
+	"id": 168701307,
+	"name": "LogicInsight - Nutanix Host Degradation Monitor",
+	"type": "query alert",
+	"query": "max(last_5m):avg:logicinsight.pe.host_is_degraded{source:nutanix_clusters} by {ntnx_cluster_name,host_name,host_serial,host_block_serial,host_is_degraded,host_in_maintenance_mode,host_hypervisor_type,host_model_name} > 1",
+	"message": "{{#is_alert}}\n\nAlert status: One or more hosts in the cluster are in a degraded state.\n\nThis condition may lead to performance issues, instability, or impact the availability of services running on the affected host(s). Immediate review is recommended.\n\nRecommended actions:\n\n1. Log in to Prism and navigate to **Hardware > Hosts** to identify the degraded host(s).\n2. Review hardware alerts or warnings for CPU, memory, NICs, power supply, or disk controllers.\n3. Ensure that all Nutanix services (e.g., Genesis, Prism, Stargate, Curator) are running on the affected host.\n4. If the host is in maintenance mode or has failed services, investigate and restore functionality.\n5. Consider migrating workloads off the degraded host using VM migration (live or cold) if performance is impacted.\n6. If the issue persists, open a case with Nutanix Support and attach relevant logs (host logs, NCC checks).\n\n{{/is_alert}}\n\n{{#is_recovery}}\nRecovery notice: All hosts in cluster {{cluster_name}} are now operating in a healthy state.\nThe cluster has recovered from the degraded condition. Continue to monitor performance.\n{{/is_recovery}}",
+	"tags": [
+		"LOGICAPP_VERSION_2025.04.08.2326",
+		"NTNX_CRITICAL"
+	],
+	"options": {
+		"thresholds": {
+			"critical": 1
+		},
+		"notify_audit": false,
+		"on_missing_data": "resolve",
+		"include_tags": true,
+		"new_group_delay": 60,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	},
+	"priority": 1
+}

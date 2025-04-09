@@ -1,0 +1,25 @@
+{
+	"id": 168709853,
+	"name": "LogicInsight - Nutanix Host CPU Usage Monitor",
+	"type": "query alert",
+	"query": "avg(last_10m):avg:logicinsight.pe.host_stats_hypervisor_cpu_usage_ppm{source:nutanix_clusters} by {ntnx_cluster_name,host_name} / 10000 > 85",
+	"message": "{{#is_alert}}\n\nAlert status: A host has exceeded critical CPU usage thresholds for over 10 minutes. \nThis can lead to performance degradation, resource contention, or service instability.\n\n#### Thresholds:\n- Warning: CPU usage > 75% (sustained)\n- Critical: CPU usage > 85% (sustained)\n\n#### Recommended actions:\n\n1. Log in to Prism and review host CPU usage under **Hardware > Hosts**.\n2. Identify the processes or virtual machines consuming high CPU resources.\n3. Consider balancing workloads by migrating VMs to other hosts in the cluster.\n4. Validate that no runaway processes or abnormal behaviors are causing the spike.\n5. If the host is consistently under heavy load, evaluate the need for scaling out the cluster.\n6. Review host affinity rules or reservations that might prevent VM migration.\n\n{{/is_alert}}\n\n{{#is_recovery}}\nRecovery notice: CPU usage on all hosts in cluster {{ntnx_cluster_name}} has returned to normal levels.\nNo further action is required, but we recommend continuing to monitor performance trends.\n{{/is_recovery}}",
+	"tags": [
+		"LOGICAPP_VERSION_2025.04.08.2326",
+		"NTNX_CRITICAL",
+		"NTNX_WARNING"
+	],
+	"options": {
+		"thresholds": {
+			"critical": 85,
+			"warning": 75
+		},
+		"notify_audit": false,
+		"on_missing_data": "resolve",
+		"include_tags": true,
+		"new_group_delay": 60,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	},
+	"priority": 3
+}

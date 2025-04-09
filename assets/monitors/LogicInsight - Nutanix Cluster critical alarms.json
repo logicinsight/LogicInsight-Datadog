@@ -1,12 +1,12 @@
 {
-	"id": 168342051,
+	"id": 168356201,
 	"name": "LogicInsight - Nutanix Cluster critical alarms",
 	"type": "event-v2 alert",
-	"query": "events(\"status:error\").rollup(\"count\").by(\"message,cluster_name\").last(\"5m\") > 0",
+	"query": "events(\"status:error\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 0",
 	"message": "Review",
 	"tags": [
 		"NTNX_CRITICAL",
-		"LOGICAPP_VERSION_2025.04.04.1626"
+		"LOGICAPP_VERSION_2025.04.08.2326"
 	],
 	"options": {
 		"thresholds": {
@@ -16,8 +16,7 @@
 		"notify_audit": false,
 		"on_missing_data": "default",
 		"include_tags": true,
-		"new_group_delay": 60,
-		"groupby_simple_monitor": false
+		"new_group_delay": 60
 	},
 	"priority": 1
 }
