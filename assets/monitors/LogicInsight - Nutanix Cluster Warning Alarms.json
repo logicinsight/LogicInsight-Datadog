@@ -1,12 +1,13 @@
 {
-	"id": 168342054,
-	"name": "LogicInsight - Nutanix Cluster warning alarms",
+	"id": 168356204,
+	"name": "LogicInsight - Nutanix Cluster Warning Alarms",
 	"type": "event-v2 alert",
-	"query": "events(\"status:warn\").rollup(\"count\").by(\"message,cluster_name\").last(\"5m\") > 100",
+	"query": "events(\"status:warn\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 100",
 	"message": "Review",
 	"tags": [
+		"LOGICAPP_NTNX_ALARMS",
 		"NTNX_WARNING",
-		"LOGICAPP_VERSION_2025.04.04.1626"
+		"LOGICAPP_VERSION_2025.04.08.2326"
 	],
 	"options": {
 		"thresholds": {
@@ -17,8 +18,7 @@
 		"notify_audit": false,
 		"on_missing_data": "default",
 		"include_tags": true,
-		"new_group_delay": 60,
-		"groupby_simple_monitor": false
+		"new_group_delay": 60
 	},
 	"priority": 3
 }
