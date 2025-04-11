@@ -1,6 +1,6 @@
 {
 	"id": 168356202,
-	"name": "LogicInsight - Nutanix Cluster info alarms",
+	"name": "LogicInsight - Nutanix Cluster Info Alarms",
 	"type": "event-v2 alert",
 	"query": "events(\"status:info\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 5000",
 	"message": "review",
