@@ -1,0 +1,39 @@
+{
+	"version": 2,
+	"created_at": "2025-04-15",
+	"last_updated_at": "2025-04-15",
+	"title": "Nutanix Warning Alarms",
+	"description": "Sends native Nutanix cluster alarms with 'warning' status. Only warning-level alerts are reported.",
+	"definition": {
+		"id": 169025326,
+		"name": "LogicInsight - Nutanix Cluster Warning Alarms",
+		"type": "event-v2 alert",
+		"query": "events(\"status:warn\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 100",
+		"message": "{{#is_alert}}\n\nWarning Alarm Detected on Nutanix Cluster `{{ntnx_cluster_name}}`\n\nA warning system alarm has been detected and repeated within the last 5 minutes.  \nManual resolution is required in Nutanix Prism to stop recurrence.\n\nThis alert will automatically resolve in Datadog if it disappears for more than 5 minutes.\nTo resolve immediately, mark it as *Resolved* directly in Prism.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nNutanix Warning Resolved in Cluster `{{ntnx_cluster_name}}`\n\nThe following warning alarm has not been seen for more than 5 minutes and is now considered resolved:\n\nCluster status is back to normal. Good job!\n\n{{/is_recovery}}",
+		"tags": [
+			"LOGICAPP_NTNX_ALARMS",
+			"NTNX_WARNING",
+			"LOGICAPP_VERSION_2025.04.08.2326"
+		],
+		"options": {
+			"thresholds": {
+				"critical": 100,
+				"warning": 0
+			},
+			"enable_logs_sample": false,
+			"notify_audit": false,
+			"on_missing_data": "default",
+			"include_tags": true,
+			"new_group_delay": 60,
+			"groupby_simple_monitor": false,
+			"silenced": {}
+		},
+		"priority": 3,
+		"restriction_policy": {
+			"bindings": []
+		}
+	},
+	"tags": [
+		"integration:<REPLACE_WITH_APP_ID>"
+	]
+}

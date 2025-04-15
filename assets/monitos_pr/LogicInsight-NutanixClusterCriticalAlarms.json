@@ -1,0 +1,38 @@
+{
+	"version": 2,
+	"created_at": "2025-04-15",
+	"last_updated_at": "2025-04-15",
+	"title": "Nutanix Critical Cluster Alarms Detected",
+	"description": "Sends critical native alarms from Nutanix clusters when error-level events are detected. Requires manual resolution in Prism.",
+	"definition": {
+		"id": 169025317,
+		"name": "LogicInsight - Nutanix Cluster Critical Alarms",
+		"type": "event-v2 alert",
+		"query": "events(\"status:error\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 0",
+		"message": "{{#is_alert}}\n\nCritical Alarm Detected on Nutanix Cluster `{{ntnx_cluster_name}}`\n\nA critical system alarm has been detected and repeated within the last 5 minutes.  \nManual resolution is required in Nutanix Prism to stop recurrence.\n\nThis alert will automatically resolve in Datadog if it disappears for more than 5 minutes.\nTo resolve immediately, mark it as Resolved directly in Prism.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nNutanix Alarm Resolved in Cluster `{{ntnx_cluster_name}}`\n\nThe following critical alarm has not been seen for more than 5 minutes and is now considered resolved:\n\nCluster status is back to normal. Good job!\n\n{{/is_recovery}}",
+		"tags": [
+			"LOGICAPP_NTNX_ALARMS",
+			"NTNX_CRITICAL",
+			"LOGICAPP_VERSION_2025.04.08.2326"
+		],
+		"options": {
+			"thresholds": {
+				"critical": 0
+			},
+			"enable_logs_sample": false,
+			"notify_audit": false,
+			"on_missing_data": "default",
+			"include_tags": true,
+			"new_group_delay": 60,
+			"groupby_simple_monitor": false,
+			"silenced": {}
+		},
+		"priority": 1,
+		"restriction_policy": {
+			"bindings": []
+		}
+	},
+	"tags": [
+		"integration:<REPLACE_WITH_APP_ID>"
+	]
+}
