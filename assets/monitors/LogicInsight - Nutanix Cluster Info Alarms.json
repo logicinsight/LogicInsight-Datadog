@@ -1,15 +1,15 @@
 {
-	"id": 168356202,
+	"id": 169025321,
 	"name": "LogicInsight - Nutanix Cluster Info Alarms",
 	"type": "event-v2 alert",
-	"query": "events(\"status:info\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 5000",
-	"message": "review",
+	"query": "events(\"status:info\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 50000",
+	"message": "{{#is_alert}}\n\nInformational Event from Nutanix Cluster `{{ntnx_cluster_name}}`\n\nThis is a non-critical system event reported by Nutanix.  \nIt does not require immediate action, but it provides valuable insights about system activities, recommended actions, or recent tasks.\n\nPurpose:  \n\nThese informational events help monitor the health, activity, and behavior of your infrastructure.  \nUse them to:\n\n1. Track task executions and system changes.\n2. Detect configuration drifts or recommended optimizations.\n3. Improve visibility into cluster-level operations.\n\nNo further action is required unless these events become recurrent or are tied to performance degradation.\n\n{{/is_alert}}",
 	"tags": [
 		"LOGICAPP_VERSION_2025.04.08.2326"
 	],
 	"options": {
 		"thresholds": {
-			"critical": 5000
+			"critical": 50000
 		},
 		"enable_logs_sample": false,
 		"notify_audit": false,
