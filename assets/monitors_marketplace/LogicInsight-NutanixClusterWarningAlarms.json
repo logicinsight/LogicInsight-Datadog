@@ -2,8 +2,8 @@
 	"version": 2,
 	"created_at": "2025-04-15",
 	"last_updated_at": "2025-04-15",
-	"title": "Nutanix Warning Alarms",
-	"description": "Sends native Nutanix cluster alarms with 'warning' status. Only warning-level alerts are reported.",
+	"title": "Repeated Warning Alarms Detected",
+	"description": "Detects repeated warning alarms in Nutanix clusters. Helps identify unresolved warning issues that require manual intervention in Prism.",
 	"definition": {
 		"id": 169025326,
 		"name": "LogicInsight - Nutanix Cluster Warning Alarms",
