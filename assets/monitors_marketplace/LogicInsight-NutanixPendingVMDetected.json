@@ -2,7 +2,7 @@
 	"version": 2,
 	"created_at": "2025-04-15",
 	"last_updated_at": "2025-04-15",
-	"title": "Pending Snapshot Replication Detected",
+	"title": "System Detected Pending Snapshot Replication",
 	"description": "Detects when one or more VM snapshots are pending replication in Nutanix Protection Domains. Helps ensure backup and disaster recovery processes remain functional.",
 	"definition": {
 		"id": 169025332,
