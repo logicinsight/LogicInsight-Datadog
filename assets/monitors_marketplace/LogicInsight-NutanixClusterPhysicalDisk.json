@@ -1,0 +1,37 @@
+{
+	"version": 2,
+	"created_at": "2025-04-17",
+	"last_updated_at": "2025-04-17",
+	"title": "Detected critical disk failures in Nutanix clusters",
+	"description": "Detects critical disk failures, offline disks, or disk removals in Nutanix clusters. Helps identify hardware issues that impact cluster resiliency and require immediate review or replacement through Prism.",
+	"definition": {
+		"id": 169576193,
+		"name": "LogicInsight - Nutanix Cluster Physical Disk",
+		"type": "event-v2 alert",
+		"query": "events(\"alert_id:(_a1044 OR _a1103 OR _a101048)\").rollup(\"count\").by(\"ntnx_cluster_name,message\").last(\"5m\") > 1",
+		"message": "{{#is_alert}}\n\nNutanix Disk Failure Detected on Cluster `{{ntnx_cluster_name}}`\n\nA disk-related critical alarm has been detected. Immediate attention is recommended to preserve cluster resiliency.\n\nRecommended actions:\n- Log in to Prism and navigate to **Hardware > Disks**.\n- Locate the affected disk using the serial number and node information.\n- Validate if the failure is transient (e.g., connectivity loss) or permanent hardware removal.\n- If necessary, replace the disk following Nutanix hardware guidelines.\n- Monitor cluster resiliency and data rebalancing tasks.\n\n**Note**:  \nThis alert is automatically cleared if the disk is remounted or replaced successfully, or if the alarm is manually resolved in Prism.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nNutanix Disk Alarm Cleared on Cluster `{{ntnx_cluster_name}}`\n\nThe disk-related critical alarm for the following component has been resolved:\n\nCluster resiliency has returned to a normal state. No further action required.\n\n{{/is_recovery}}",
+		"tags": [
+			"LOGICAPP_NTNX_ALARMS",
+			"LOGICAPP_VERSION_2025.04.08.2326",
+			"LOGICAPP_PDISK_ALARMS"
+		],
+		"options": {
+			"thresholds": {
+				"critical": 1
+			},
+			"enable_logs_sample": false,
+			"notify_audit": false,
+			"on_missing_data": "default",
+			"include_tags": true,
+			"new_group_delay": 60,
+			"silenced": {}
+		},
+		"priority": 2,
+		"restriction_policy": {
+			"bindings": []
+		}
+	},
+	"tags": [
+		"integration:logicinsight-nutanix-core"
+	]
+}
