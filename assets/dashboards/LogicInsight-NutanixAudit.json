@@ -1,1 +1,356 @@
-{"title":"LogicInsight - Nutanix Audit","description":"### **📊 LogicInsight - Nutanix Audit Dashboard Explanation**\n\nThe **LogicInsight - Nutanix Audit Events Dashboard** provides a centralized view of **security, virtual machine, and storage-related audit logs** collected across Nutanix environments. It allows administrators to **track user actions, VM lifecycle events, and system-level activities**, ensuring full visibility and traceability for operational and compliance purposes.\n\n***\n\n## **1️⃣ Login Audit (Blue Section - Left)**\n\nThis section tracks **user login activities** from different endpoints:\n\n-   **Login Events Panel** – Lists all login attempts, including:\n\n    -   Source cluster and host.\n    -   Affected entity (e.g., user account).\n    -   Timestamp and event UUID.\n    -   Information if logins are successful or failed.\n\n✔ **Why Is It Important?**\\\nEnables auditing of **user authentication patterns**, **potential security breaches**, and **suspicious login behavior**.\n\n***\n\n## **2️⃣ VM Audit (Purple Section - Center)**\n\nThis section covers a wide range of **virtual machine lifecycle operations**:\n\n-   **VM Migrate** – Shows details of VM live migrations, including source and target.\n-   **VM Update** – Tracks configuration changes applied to VMs.\n-   **VM Create** – Logs creation of new VMs with metadata like entity UUID and hostname.\n-   **VM Delete** – Indicates when VMs are deleted, including the initiator and type.\n\n✔ **Why Is It Important?**\\\nTracks changes and operations on VMs to **ensure proper governance, traceability, and audit readiness**.\n\n***\n\n## **3️⃣ System Action (Green Section - Right)**\n\nThis panel displays **system-level activities** performed automatically or via policy:\n\n-   **Replication Events** – Captures replication of VM recovery points (e.g., scheduled backups).\n-   **Success Audits** – Details for each successful system action, including VM name, recovery type, source and destination node, and cluster name.\n\n✔ **Why Is It Important?**\\\nProvides a clear audit trail of **data protection actions**, **replication health**, and **system automation success**.\n\n***\n\n## **4️⃣ Volume Audit (Purple Section - Bottom)**\n\nThis section logs activities related to **volume group management**:\n\n-   **Volume Create** – Tracks the creation of volume groups, including associated tasks and metadata like `volume_group_name`, `uuid`, etc.\n\n✔ **Why Is It Important?**\\\nEnsures proper monitoring of **storage configuration changes**, helping maintain consistency and storage governance.\n\n***\n\n### **📌 Why This Dashboard Matters?**\n\n✅ **Complete Audit Trail** – Captures all user actions, system operations, and changes across VMs and volumes.\\\n✅ **Security and Compliance** – Assists in **compliance reporting** and **security investigations**.\\\n✅ **Operational Transparency** – Enables quick diagnosis of issues by providing context for recent changes or failures.\\\n✅ **Proactive Monitoring** – Helps correlate user activity with system behavior for **faster root cause analysis**.","widgets":[{"id":8565757137491390,"definition":{"type":"image","url":"https://logicappupdate.s3.us-east-1.amazonaws.com/dash_logo.png","sizing":"cover","has_background":true,"has_border":true,"vertical_align":"center","horizontal_align":"center"},"layout":{"x":0,"y":0,"width":4,"height":1}},{"id":4192860186789124,"definition":{"title":"VM Audit","background_color":"vivid_purple","show_title":true,"type":"group","layout_type":"ordered","widgets":[{"id":2348277407328466,"definition":{"title":"VM Migrate","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:vmmigrate","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":0,"width":4,"height":2}},{"id":2552945625413982,"definition":{"title":"VM Update","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:vmupdate","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":4,"y":0,"width":4,"height":2}},{"id":2605775676758532,"definition":{"title":"VM Create","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:vmcreate","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":2,"width":8,"height":2}},{"id":5648095496582222,"definition":{"title":"VM Delete","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:vmdelete","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":4,"width":8,"height":2}}]},"layout":{"x":4,"y":0,"width":8,"height":7}},{"id":8160319405156754,"definition":{"title":"Login Audit","background_color":"vivid_blue","show_title":true,"type":"group","layout_type":"ordered","widgets":[{"id":7160853226166584,"definition":{"title":"Login Events","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value severity:kaudit classification:useraction","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":0,"width":4,"height":11}}]},"layout":{"x":0,"y":1,"width":4,"height":12}},{"id":2526798374431930,"definition":{"title":"Volume Audit","background_color":"vivid_purple","show_title":true,"type":"group","layout_type":"ordered","widgets":[{"id":581902423249678,"definition":{"title":"Volume Create","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:volumegroupcreate","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":0,"width":8,"height":2}},{"id":4970976528491684,"definition":{"title":"Volume Delete","title_size":"16","title_align":"left","time":{"type":"live","unit":"week","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value operation_type:volumegroupdelete","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":2,"width":8,"height":3}}]},"layout":{"x":4,"y":7,"width":8,"height":6}},{"id":5423579900203336,"definition":{"title":"System Action","background_color":"green","show_title":true,"type":"group","layout_type":"ordered","widgets":[{"id":953644535951004,"definition":{"title":"System Action","title_size":"16","title_align":"left","time":{"type":"live","unit":"hour","value":1},"requests":[{"response_format":"event_list","query":{"query_string":"ntnx_cluster_name:$cluster_name.value classification:systemaction","data_source":"event_stream","event_size":"l"},"columns":[]}],"type":"list_stream"},"layout":{"x":0,"y":0,"width":12,"height":12}}]},"layout":{"x":0,"y":0,"width":12,"height":13,"is_column_break":true}}],"template_variables":[{"name":"cluster_name","prefix":"ntnx_cluster_name","available_values":[],"default":"*"}],"layout_type":"ordered","notify_list":[],"reflow_type":"fixed"}
+{
+    "title": "LogicInsight - Nutanix Audit",
+    "description": "### **📊 LogicInsight - Nutanix Audit Dashboard Explanation**\n\nThe **LogicInsight - Nutanix Audit Events Dashboard** provides a centralized view of **security, virtual machine, and storage-related audit logs** collected across Nutanix environments. It allows administrators to **track user actions, VM lifecycle events, and system-level activities**, ensuring full visibility and traceability for operational and compliance purposes.\n\n***\n\n## **1️⃣ Login Audit (Blue Section - Left)**\n\nThis section tracks **user login activities** from different endpoints:\n\n-   **Login Events Panel** – Lists all login attempts, including:\n\n    -   Source cluster and host.\n    -   Affected entity (e.g., user account).\n    -   Timestamp and event UUID.\n    -   Information if logins are successful or failed.\n\n✔ **Why Is It Important?**\\\nEnables auditing of **user authentication patterns**, **potential security breaches**, and **suspicious login behavior**.\n\n***\n\n## **2️⃣ VM Audit (Purple Section - Center)**\n\nThis section covers a wide range of **virtual machine lifecycle operations**:\n\n-   **VM Migrate** – Shows details of VM live migrations, including source and target.\n-   **VM Update** – Tracks configuration changes applied to VMs.\n-   **VM Create** – Logs creation of new VMs with metadata like entity UUID and hostname.\n-   **VM Delete** – Indicates when VMs are deleted, including the initiator and type.\n\n✔ **Why Is It Important?**\\\nTracks changes and operations on VMs to **ensure proper governance, traceability, and audit readiness**.\n\n***\n\n## **3️⃣ System Action (Green Section - Right)**\n\nThis panel displays **system-level activities** performed automatically or via policy:\n\n-   **Replication Events** – Captures replication of VM recovery points (e.g., scheduled backups).\n-   **Success Audits** – Details for each successful system action, including VM name, recovery type, source and destination node, and cluster name.\n\n✔ **Why Is It Important?**\\\nProvides a clear audit trail of **data protection actions**, **replication health**, and **system automation success**.\n\n***\n\n## **4️⃣ Volume Audit (Purple Section - Bottom)**\n\nThis section logs activities related to **volume group management**:\n\n-   **Volume Create** – Tracks the creation of volume groups, including associated tasks and metadata like `volume_group_name`, `uuid`, etc.\n\n✔ **Why Is It Important?**\\\nEnsures proper monitoring of **storage configuration changes**, helping maintain consistency and storage governance.\n\n***\n\n### **📌 Why This Dashboard Matters?**\n\n✅ **Complete Audit Trail** – Captures all user actions, system operations, and changes across VMs and volumes.\\\n✅ **Security and Compliance** – Assists in **compliance reporting** and **security investigations**.\\\n✅ **Operational Transparency** – Enables quick diagnosis of issues by providing context for recent changes or failures.\\\n✅ **Proactive Monitoring** – Helps correlate user activity with system behavior for **faster root cause analysis**.",
+    "widgets": [
+      {
+        "id": 8565757137491390,
+        "definition": {
+          "type": "image",
+          "url": "https://logicappupdate.s3.us-east-1.amazonaws.com/dash_logo.png",
+          "sizing": "cover",
+          "has_background": true,
+          "has_border": true,
+          "vertical_align": "center",
+          "horizontal_align": "center"
+        },
+        "layout": {
+          "x": 0,
+          "y": 0,
+          "width": 4,
+          "height": 1
+        }
+      },
+      {
+        "id": 4192860186789124,
+        "definition": {
+          "title": "VM Audit",
+          "background_color": "vivid_purple",
+          "show_title": true,
+          "type": "group",
+          "layout_type": "ordered",
+          "widgets": [
+            {
+              "id": 2348277407328466,
+              "definition": {
+                "title": "VM Migrate",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:vmmigrate",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 2
+              }
+            },
+            {
+              "id": 2552945625413982,
+              "definition": {
+                "title": "VM Update",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:vmupdate",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 4,
+                "y": 0,
+                "width": 4,
+                "height": 2
+              }
+            },
+            {
+              "id": 2605775676758532,
+              "definition": {
+                "title": "VM Create",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:vmcreate",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 2,
+                "width": 8,
+                "height": 2
+              }
+            },
+            {
+              "id": 5648095496582222,
+              "definition": {
+                "title": "VM Delete",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:vmdelete",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 4,
+                "width": 8,
+                "height": 2
+              }
+            }
+          ]
+        },
+        "layout": {
+          "x": 4,
+          "y": 0,
+          "width": 8,
+          "height": 7
+        }
+      },
+      {
+        "id": 8160319405156754,
+        "definition": {
+          "title": "Login Audit",
+          "background_color": "vivid_blue",
+          "show_title": true,
+          "type": "group",
+          "layout_type": "ordered",
+          "widgets": [
+            {
+              "id": 7160853226166584,
+              "definition": {
+                "title": "Login Events",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value severity:kaudit classification:useraction",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 4,
+                "height": 11
+              }
+            }
+          ]
+        },
+        "layout": {
+          "x": 0,
+          "y": 1,
+          "width": 4,
+          "height": 12
+        }
+      },
+      {
+        "id": 2526798374431930,
+        "definition": {
+          "title": "Volume Audit",
+          "background_color": "vivid_purple",
+          "show_title": true,
+          "type": "group",
+          "layout_type": "ordered",
+          "widgets": [
+            {
+              "id": 581902423249678,
+              "definition": {
+                "title": "Volume Create",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:volumegroupcreate",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 8,
+                "height": 2
+              }
+            },
+            {
+              "id": 4970976528491684,
+              "definition": {
+                "title": "Volume Delete",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "week",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value operation_type:volumegroupdelete",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 2,
+                "width": 8,
+                "height": 3
+              }
+            }
+          ]
+        },
+        "layout": {
+          "x": 4,
+          "y": 7,
+          "width": 8,
+          "height": 6
+        }
+      },
+      {
+        "id": 5423579900203336,
+        "definition": {
+          "title": "System Action",
+          "background_color": "green",
+          "show_title": true,
+          "type": "group",
+          "layout_type": "ordered",
+          "widgets": [
+            {
+              "id": 953644535951004,
+              "definition": {
+                "title": "System Action",
+                "title_size": "16",
+                "title_align": "left",
+                "time": {
+                  "type": "live",
+                  "unit": "hour",
+                  "value": 1
+                },
+                "requests": [
+                  {
+                    "response_format": "event_list",
+                    "query": {
+                      "query_string": "ntnx_cluster_name:$cluster_name.value classification:systemaction",
+                      "data_source": "event_stream",
+                      "event_size": "l"
+                    },
+                    "columns": []
+                  }
+                ],
+                "type": "list_stream"
+              },
+              "layout": {
+                "x": 0,
+                "y": 0,
+                "width": 12,
+                "height": 12
+              }
+            }
+          ]
+        },
+        "layout": {
+          "x": 0,
+          "y": 0,
+          "width": 12,
+          "height": 13,
+          "is_column_break": true
+        }
+      }
+    ],
+    "template_variables": [
+      {
+        "name": "cluster_name",
+        "prefix": "ntnx_cluster_name",
+        "available_values": [],
+        "default": "*"
+      }
+    ],
+    "layout_type": "ordered",
+    "notify_list": [],
+    "reflow_type": "fixed"
+  }
