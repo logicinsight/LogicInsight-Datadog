@@ -9,7 +9,7 @@
 		"name": "LogicInsight - Nutanix Cluster Warning Alarms",
 		"type": "event-v2 alert",
 		"query": "events(\"status:warn\").rollup(\"count\").by(\"message,ntnx_cluster_name\").last(\"5m\") > 100",
-		"message": "{{#is_alert}}\n\nWarning Alarm Detected on Nutanix Cluster `{{ntnx_cluster_name}}`\n\nA warning system alarm has been detected and repeated within the last 5 minutes.  \nManual resolution is required in Nutanix Prism to stop recurrence.\n\nThis alert will automatically resolve in Datadog if it disappears for more than 5 minutes.\nTo resolve immediately, mark it as *Resolved* directly in Prism.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nNutanix Warning Resolved in Cluster `{{ntnx_cluster_name}}`\n\nThe following warning alarm has not been seen for more than 5 minutes and is now considered resolved:\n\nCluster status is back to normal. Good job!\n\n{{/is_recovery}}",
+		"message": "{{#is_alert}}\n\nWarning Alarm Detected on Nutanix Cluster `{{ntnx_cluster_name}}`\n\nA warning system alarm has been detected and repeated within the last 5 minutes.  \nManual resolution is required in Nutanix Prism to stop recurrence.\n\nThis alert automatically resolves in Datadog if it disappears for more than 5 minutes.\nTo resolve immediately, mark it as *Resolved* directly in Prism.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nNutanix Warning Resolved in Cluster `{{ntnx_cluster_name}}`\n\nThe following warning alarm has not been seen for more than 5 minutes and is now considered resolved:\n\nCluster status is back to normal. Good job!\n\n{{/is_recovery}}",
 		"tags": [
 			"LOGICAPP_NTNX_ALARMS",
 			"NTNX_WARNING",
