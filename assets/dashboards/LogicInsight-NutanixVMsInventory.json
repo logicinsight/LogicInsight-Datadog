@@ -1,846 +1,878 @@
 {
-    "title": "LogicInsight - Nutanix VMs Inventory",
-    "description": "### 📊 LogicInsight - Nutanix VMs Inventory Dashboard Explanation\n\nThe **LogicInsight - Nutanix VMs Inventory Dashboard** gives a **comprehensive view of all virtual machines (VMs)** within the Nutanix clusters. It is designed to **monitor VM configurations, resource allocations, power states, protection status, and general health**, all in a **single, consolidated inventory**.\n\n***\n\n## 1️⃣ **VMs Inventory Table (Main Section)**\n\nThis table shows **key details of every VM** deployed across the selected Nutanix clusters. It's structured with **critical data fields**, providing administrators with **quick insights into VM health and usage**.\n\n| **Field Name**                                                                         | **Description**                                                                                                 |\n| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |\n| **CLUSTER_NAME**                                                                       | Identifies the Nutanix cluster where the VM is running.                                                         |\n| **VM_NAME**                                                                            | The name assigned to the virtual machine.                                                                       |\n| **VM_POWERSTATE**                                                                      | Displays whether the VM is **ON** or **OFF**.                                                                   |\n| **HOST_NAME**                                                                          | The physical host where the VM is currently running.                                                            |\n| **VM_IP_1**                                                                            | Shows the **primary IP address** of the VM.                                                                     |\n| **VM_PD**                                                                              | Indicates whether the VM is protected by a **Protection Domain (PD)** or **Protection Policy**.                 |\n| ➡ `UNPROTECTED` means the VM has no protection, posing a **risk of data loss**.        |                                                                                                                 |\n| ➡ `PROTECTION POLICY` indicates it’s covered by a scheduled backup/replication policy. |                                                                                                                 |\n| **VM_VCPU**                                                                            | The number of **virtual CPUs** assigned to the VM.                                                              |\n| **VM_MEMORY**                                                                          | The amount of **RAM** allocated to the VM.                                                                      |\n| **VM_DISK**                                                                            | The total **disk size** assigned to the VM.                                                                     |\n| **VM_ADAPTERS**                                                                        | The number of **network interfaces (NICs)** connected to the VM.                                                |\n| **VM_NGT**                                                                             | Indicates whether **Nutanix Guest Tools (NGT)** are installed and active on the VM (1 = Enabled, 0 = Disabled). |\n| ✔ **NGT is required** for file-level restore and advanced VM management operations.    |                                                                                                                 |\n\n***\n\n## 2️⃣ **Use Cases & Benefits**\n\n✅ **VM Protection Status Tracking**\n\n-   Quickly identify **unprotected VMs** that are not included in disaster recovery or backup jobs.\n-   Prioritize adding **critical workloads** to a protection domain or policy.\n\n✅ **Resource Allocation Visibility**\n\n-   Monitor and balance **vCPU, memory, and disk** resources across clusters.\n-   Helps with **capacity planning** and identifying **over-provisioned or underutilized** VMs.\n\n✅ **Power State & Location**\n\n-   Detect VMs that are **OFF** or placed on unexpected hosts.\n-   Track **VM placement and migration** during normal operations or failover events.\n\n✅ **Nutanix Guest Tools (NGT) Monitoring**\n\n-   Ensure **NGT is enabled** for VMs requiring **advanced features** like guest file restores and application-consistent backups.\n\n***\n\n## 3️⃣ **Best Practices & Recommendations**\n\n🔹 Regularly review **VM_PD (Protection Domain) status** to avoid gaps in data protection.\\\n🔹 Monitor **resource allocations** for opportunities to **optimize workloads** (e.g., reducing over-provisioned memory).\\\n🔹 Verify **NGT deployment** on all critical VMs to **enable advanced Nutanix features**.\\\n🔹 Use this dashboard as part of a **weekly or monthly health check** to ensure **compliance with backup policies** and **resource governance**.\n\n***\n\n### ✅ Why This Dashboard Matters\n\nThis **VMs Inventory Dashboard** empowers administrators to:\n\n-   Maintain **visibility and control** over the VM environment.\n-   Improve **data protection coverage**.\n-   Optimize **resource allocation and capacity planning**.\n-   Ensure **operational readiness** through real-time monitoring.",
-    "widgets": [
-      {
-        "id": 8542605482307930,
-        "definition": {
-          "type": "image",
-          "url": "https://logicappupdate.s3.us-east-1.amazonaws.com/dash_logo.png",
-          "sizing": "cover",
-          "has_background": true,
-          "has_border": false,
-          "vertical_align": "center",
-          "horizontal_align": "center"
-        },
-        "layout": {
-          "x": 0,
-          "y": 0,
-          "width": 8,
-          "height": 1
-        }
+  "title": "LogicInsight - Nutanix VMs Inventory",
+  "description": "### 📊 LogicInsight - Nutanix VMs Inventory Dashboard Explanation\n\nThe **LogicInsight - Nutanix VMs Inventory Dashboard** gives a **comprehensive view of all virtual machines (VMs)** within the Nutanix clusters. It is designed to **monitor VM configurations, resource allocations, power states, protection status, and general health**, all in a **single, consolidated inventory**.\n\n***\n\n## 1️⃣ **VMs Inventory Table (Main Section)**\n\nThis table shows **key details of every VM** deployed across the selected Nutanix clusters. It's structured with **critical data fields**, providing administrators with **quick insights into VM health and usage**.\n\n| **Field Name**                                                                         | **Description**                                                                                                 |\n| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |\n| **CLUSTER_NAME**                                                                       | Identifies the Nutanix cluster where the VM is running.                                                         |\n| **VM_NAME**                                                                            | The name assigned to the virtual machine.                                                                       |\n| **VM_POWERSTATE**                                                                      | Displays whether the VM is **ON** or **OFF**.                                                                   |\n| **HOST_NAME**                                                                          | The physical host where the VM is currently running.                                                            |\n| **VM_IP_1**                                                                            | Shows the **primary IP address** of the VM.                                                                     |\n| **VM_PD**                                                                              | Indicates whether the VM is protected by a **Protection Domain (PD)** or **Protection Policy**.                 |\n| ➡ `UNPROTECTED` means the VM has no protection, posing a **risk of data loss**.        |                                                                                                                 |\n| ➡ `PROTECTION POLICY` indicates it’s covered by a scheduled backup/replication policy. |                                                                                                                 |\n| **VM_VCPU**                                                                            | The number of **virtual CPUs** assigned to the VM.                                                              |\n| **VM_MEMORY**                                                                          | The amount of **RAM** allocated to the VM.                                                                      |\n| **VM_DISK**                                                                            | The total **disk size** assigned to the VM.                                                                     |\n| **VM_ADAPTERS**                                                                        | The number of **network interfaces (NICs)** connected to the VM.                                                |\n| **VM_NGT**                                                                             | Indicates whether **Nutanix Guest Tools (NGT)** are installed and active on the VM (1 = Enabled, 0 = Disabled). |\n| ✔ **NGT is required** for file-level restore and advanced VM management operations.    |                                                                                                                 |\n\n***\n\n## 2️⃣ **Use Cases & Benefits**\n\n✅ **VM Protection Status Tracking**\n\n-   Quickly identify **unprotected VMs** that are not included in disaster recovery or backup jobs.\n-   Prioritize adding **critical workloads** to a protection domain or policy.\n\n✅ **Resource Allocation Visibility**\n\n-   Monitor and balance **vCPU, memory, and disk** resources across clusters.\n-   Helps with **capacity planning** and identifying **over-provisioned or underutilized** VMs.\n\n✅ **Power State & Location**\n\n-   Detect VMs that are **OFF** or placed on unexpected hosts.\n-   Track **VM placement and migration** during normal operations or failover events.\n\n✅ **Nutanix Guest Tools (NGT) Monitoring**\n\n-   Ensure **NGT is enabled** for VMs requiring **advanced features** like guest file restores and application-consistent backups.\n\n***\n\n## 3️⃣ **Best Practices & Recommendations**\n\n🔹 Regularly review **VM_PD (Protection Domain) status** to avoid gaps in data protection.\\\n🔹 Monitor **resource allocations** for opportunities to **optimize workloads** (e.g., reducing over-provisioned memory).\\\n🔹 Verify **NGT deployment** on all critical VMs to **enable advanced Nutanix features**.\\\n🔹 Use this dashboard as part of a **weekly or monthly health check** to ensure **compliance with backup policies** and **resource governance**.\n\n***\n\n### ✅ Why This Dashboard Matters\n\nThis **VMs Inventory Dashboard** empowers administrators to:\n\n-   Maintain **visibility and control** over the VM environment.\n-   Improve **data protection coverage**.\n-   Optimize **resource allocation and capacity planning**.\n-   Ensure **operational readiness** through real-time monitoring.",
+  "widgets": [
+    {
+      "id": 8542605482307930,
+      "definition": {
+        "type": "image",
+        "url": "https://logicappupdate.s3.us-east-1.amazonaws.com/dash_logo.png",
+        "sizing": "cover",
+        "has_background": true,
+        "has_border": false,
+        "vertical_align": "center",
+        "horizontal_align": "center"
       },
-      {
-        "id": 4307912894106426,
-        "definition": {
-          "title": "Protection Summary",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "requests": [
-            {
-              "queries": [
-                {
-                  "name": "query1",
-                  "data_source": "metrics",
-                  "query": "sum:logicinsight.pe.vms_control{$cluster_name , $vm_project , $host_name} by {vm_pd,ntnx_cluster_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "style": {
-                "palette": "semantic"
-              },
-              "formulas": [
-                {
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "VMs"
-                    }
-                  },
-                  "formula": "query1"
-                }
-              ],
-              "sort": {
-                "count": 500,
-                "order_by": [
-                  {
-                    "type": "formula",
-                    "index": 0,
-                    "order": "desc"
-                  }
-                ]
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 3,
+        "height": 1
+      }
+    },
+    {
+      "id": 7316285597322938,
+      "definition": {
+        "type": "note",
+        "content": "Select a cluster, project, or category for proper visualization.",
+        "background_color": "yellow",
+        "font_size": "14",
+        "text_align": "center",
+        "vertical_align": "center",
+        "show_tick": true,
+        "tick_pos": "50%",
+        "tick_edge": "bottom",
+        "has_padding": true
+      },
+      "layout": {
+        "x": 3,
+        "y": 0,
+        "width": 9,
+        "height": 1
+      }
+    },
+    {
+      "id": 5769711412277172,
+      "definition": {
+        "title": "Total VMs",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_value",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "formula": "query1"
               }
-            }
-          ],
-          "type": "sunburst",
-          "legend": {
-            "type": "table"
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar"
           }
-        },
-        "layout": {
-          "x": 8,
-          "y": 0,
-          "width": 4,
-          "height": 3
+        ],
+        "autoscale": true,
+        "precision": 2,
+        "timeseries_background": {
+          "type": "area"
         }
       },
-      {
-        "id": 5769711412277172,
-        "definition": {
-          "title": "Total VMs",
-          "title_size": "16",
-          "title_align": "left",
-          "type": "query_value",
-          "requests": [
-            {
-              "formulas": [
-                {
-                  "formula": "query1"
-                }
-              ],
-              "queries": [
-                {
-                  "name": "query1",
-                  "data_source": "metrics",
-                  "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar"
-            }
-          ],
-          "autoscale": true,
-          "precision": 2,
-          "timeseries_background": {
-            "type": "area"
-          }
-        },
-        "layout": {
-          "x": 0,
-          "y": 1,
-          "width": 2,
-          "height": 2
-        }
-      },
-      {
-        "id": 8048854937325360,
-        "definition": {
-          "title": "Total VMs Power ON",
-          "title_size": "16",
-          "title_align": "left",
-          "type": "query_value",
-          "requests": [
-            {
-              "formulas": [
-                {
-                  "formula": "query1",
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "VMs"
-                    }
+      "layout": {
+        "x": 0,
+        "y": 1,
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": 8048854937325360,
+      "definition": {
+        "title": "Total VMs Power ON",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_value",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "VMs"
                   }
-                }
-              ],
-              "queries": [
-                {
-                  "name": "query1",
-                  "data_source": "metrics",
-                  "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project, vm_powerstate:on}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "conditional_formats": [
-                {
-                  "comparator": ">",
-                  "value": 0,
-                  "palette": "white_on_green"
-                }
-              ]
-            }
-          ],
-          "autoscale": true,
-          "precision": 0,
-          "timeseries_background": {
-            "type": "area"
+                },
+                "formula": "default_zero(query1)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project,vm_powerstate:on, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "conditional_formats": [
+              {
+                "comparator": ">",
+                "value": 0,
+                "palette": "white_on_green"
+              }
+            ]
           }
-        },
-        "layout": {
-          "x": 2,
-          "y": 1,
-          "width": 2,
-          "height": 2
+        ],
+        "autoscale": true,
+        "precision": 0,
+        "timeseries_background": {
+          "type": "area"
         }
       },
-      {
-        "id": 3296191764439386,
-        "definition": {
-          "title": "Total VMs Power OFF",
-          "title_size": "16",
-          "title_align": "left",
-          "type": "query_value",
-          "requests": [
-            {
-              "formulas": [
-                {
-                  "formula": "query1",
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "VMs"
-                    }
+      "layout": {
+        "x": 2,
+        "y": 1,
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": 3296191764439386,
+      "definition": {
+        "title": "Total VMs Power OFF",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_value",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "VMs"
                   }
-                }
-              ],
-              "queries": [
-                {
-                  "name": "query1",
-                  "data_source": "metrics",
-                  "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project,vm_powerstate:off}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "conditional_formats": [
-                {
-                  "comparator": ">",
-                  "value": 0,
-                  "palette": "white_on_yellow"
-                }
-              ]
-            }
-          ],
-          "autoscale": true,
-          "precision": 0,
-          "timeseries_background": {
-            "type": "area"
+                },
+                "formula": "default_zero(query1)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project,vm_powerstate:off, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "conditional_formats": [
+              {
+                "comparator": ">=",
+                "value": 1,
+                "palette": "white_on_yellow"
+              }
+            ]
           }
-        },
-        "layout": {
-          "x": 4,
-          "y": 1,
-          "width": 2,
-          "height": 2
+        ],
+        "autoscale": true,
+        "precision": 0,
+        "timeseries_background": {
+          "type": "area"
         }
       },
-      {
-        "id": 6088051207981010,
-        "definition": {
-          "title": "Total VMs Unprotected",
-          "title_size": "16",
-          "title_align": "left",
-          "type": "query_value",
-          "requests": [
-            {
-              "formulas": [
-                {
-                  "formula": "query1",
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "VMs"
-                    }
+      "layout": {
+        "x": 4,
+        "y": 1,
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": 6088051207981010,
+      "definition": {
+        "title": "Total VMs Unprotected",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "query_value",
+        "requests": [
+          {
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "VMs"
                   }
-                }
-              ],
-              "queries": [
-                {
-                  "name": "query1",
-                  "data_source": "metrics",
-                  "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project, vm_pd:unprotected}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "conditional_formats": [
-                {
-                  "comparator": ">",
-                  "value": 0,
-                  "palette": "white_on_red"
-                }
-              ]
-            }
-          ],
-          "autoscale": true,
-          "precision": 0,
-          "timeseries_background": {
-            "type": "area"
+                },
+                "formula": "default_zero(query1)"
+              }
+            ],
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:logicinsight.pe.vms_control{$cluster_name,$vm_project, vm_pd:unprotected, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "conditional_formats": [
+              {
+                "comparator": ">",
+                "value": 0,
+                "palette": "white_on_red"
+              }
+            ]
           }
-        },
-        "layout": {
-          "x": 6,
-          "y": 1,
-          "width": 2,
-          "height": 2
+        ],
+        "autoscale": true,
+        "precision": 0,
+        "timeseries_background": {
+          "type": "area"
         }
       },
-      {
-        "id": 1957160488800048,
-        "definition": {
-          "title": "Total VMs vCPU",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "type": "query_value",
-          "requests": [
-            {
-              "response_format": "scalar",
-              "queries": [
-                {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_numVCpus{$vm_project, $cluster_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "formulas": [
-                {
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "vCPU"
-                    }
-                  },
-                  "formula": "query1"
-                }
-              ]
-            }
-          ],
-          "autoscale": true,
-          "precision": 0,
-          "timeseries_background": {
-            "yaxis": {
-              "include_zero": true
+      "layout": {
+        "x": 6,
+        "y": 1,
+        "width": 2,
+        "height": 2
+      }
+    },
+    {
+      "id": 4307912894106426,
+      "definition": {
+        "title": "Protection Summary",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "requests": [
+          {
+            "queries": [
+              {
+                "name": "query1",
+                "data_source": "metrics",
+                "query": "sum:logicinsight.pe.vms_control{$cluster_name , $vm_project , $host_name, $category} by {vm_pd,ntnx_cluster_name}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "style": {
+              "palette": "semantic"
             },
-            "type": "area"
-          }
-        },
-        "layout": {
-          "x": 0,
-          "y": 3,
-          "width": 1,
-          "height": 3
-        }
-      },
-      {
-        "id": 1005914875958654,
-        "definition": {
-          "title": "Total VMs vCPU Distribution Per Host",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "requests": [
-            {
-              "queries": [
-                {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_numVCpus{$cluster_name, $vm_project} by {host_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "style": {
-                "palette": "datadog16"
-              },
-              "formulas": [
-                {
-                  "formula": "query1",
-                  "number_format": {
-                    "unit": {
-                      "type": "custom_unit_label",
-                      "label": "vCPU"
-                    }
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "VMs"
                   }
-                }
-              ],
-              "sort": {
-                "count": 500,
-                "order_by": [
-                  {
-                    "type": "formula",
-                    "index": 0,
-                    "order": "desc"
-                  }
-                ]
+                },
+                "formula": "query1"
               }
-            }
-          ],
-          "type": "sunburst",
-          "legend": {
-            "type": "table"
-          }
-        },
-        "layout": {
-          "x": 1,
-          "y": 3,
-          "width": 3,
-          "height": 3
-        }
-      },
-      {
-        "id": 6299919912115510,
-        "definition": {
-          "title": "Total VMs Memory",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "type": "query_value",
-          "requests": [
-            {
-              "response_format": "scalar",
-              "queries": [
+            ],
+            "sort": {
+              "count": 500,
+              "order_by": [
                 {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_memoryCapacityInBytes{$vm_project, $cluster_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "formulas": [
-                {
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte_in_binary_bytes_family"
-                    }
-                  },
-                  "formula": "query1"
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
                 }
               ]
             }
-          ],
-          "autoscale": true,
-          "precision": 1,
-          "timeseries_background": {
-            "type": "area",
-            "yaxis": {
-              "include_zero": true
-            }
           }
-        },
-        "layout": {
-          "x": 4,
-          "y": 3,
-          "width": 1,
-          "height": 3
+        ],
+        "type": "sunburst",
+        "legend": {
+          "type": "table"
         }
       },
-      {
-        "id": 8460896529176234,
-        "definition": {
-          "title": "Total VMs Memory Distribution Per Host",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "requests": [
-            {
-              "queries": [
-                {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_memoryCapacityInBytes{$cluster_name,$vm_project} by {host_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "style": {
-                "palette": "datadog16"
-              },
-              "formulas": [
-                {
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte_in_binary_bytes_family"
-                    }
-                  },
-                  "formula": "query1"
-                }
-              ],
-              "sort": {
-                "count": 500,
-                "order_by": [
-                  {
-                    "type": "formula",
-                    "index": 0,
-                    "order": "desc"
-                  }
-                ]
+      "layout": {
+        "x": 8,
+        "y": 1,
+        "width": 4,
+        "height": 2
+      }
+    },
+    {
+      "id": 1957160488800048,
+      "definition": {
+        "title": "Total VMs vCPU",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_value",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_numVCpus{$vm_project, $cluster_name, $category}",
+                "aggregator": "last"
               }
-            }
-          ],
-          "type": "sunburst",
-          "legend": {
-            "type": "table"
+            ],
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "vCPU"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
           }
-        },
-        "layout": {
-          "x": 5,
-          "y": 3,
-          "width": 3,
-          "height": 3
+        ],
+        "autoscale": false,
+        "precision": 0,
+        "timeseries_background": {
+          "yaxis": {
+            "include_zero": true
+          },
+          "type": "area"
         }
       },
-      {
-        "id": 7360510782119058,
-        "definition": {
-          "title": "Total VMs Storage",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "type": "query_value",
-          "requests": [
-            {
-              "response_format": "scalar",
-              "queries": [
-                {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_diskCapacityInBytes{$vm_project,$cluster_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "formulas": [
-                {
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte_in_binary_bytes_family"
-                    }
-                  },
-                  "formula": "query1"
-                }
-              ]
-            }
-          ],
-          "autoscale": true,
-          "precision": 1,
-          "timeseries_background": {
-            "yaxis": {
-              "include_zero": true
+      "layout": {
+        "x": 0,
+        "y": 3,
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "id": 1005914875958654,
+      "definition": {
+        "title": "Total VMs vCPU Distribution Per Host",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_numVCpus{$cluster_name, $vm_project, $category} by {host_name}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "style": {
+              "palette": "datadog16"
             },
-            "type": "area"
-          }
-        },
-        "layout": {
-          "x": 8,
-          "y": 3,
-          "width": 1,
-          "height": 3
-        }
-      },
-      {
-        "id": 7714504882382388,
-        "definition": {
-          "title": "Total VMs Storage Distribution Per Cluster",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
-          },
-          "requests": [
-            {
-              "queries": [
-                {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "sum:logicinsight.pe.vms_diskCapacityInBytes{$vm_project, $cluster_name} by {ntnx_cluster_name}",
-                  "aggregator": "last"
-                }
-              ],
-              "response_format": "scalar",
-              "style": {
-                "palette": "classic"
-              },
-              "formulas": [
-                {
-                  "formula": "query1",
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte_in_binary_bytes_family"
-                    }
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "custom_unit_label",
+                    "label": "vCPU"
                   }
-                }
-              ],
-              "sort": {
-                "count": 500,
-                "order_by": [
-                  {
-                    "type": "formula",
-                    "index": 0,
-                    "order": "desc"
-                  }
-                ]
+                },
+                "formula": "query1"
               }
+            ],
+            "sort": {
+              "count": 500,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
             }
-          ],
-          "type": "sunburst",
-          "legend": {
-            "type": "table"
           }
-        },
-        "layout": {
-          "x": 9,
-          "y": 3,
-          "width": 3,
-          "height": 3
+        ],
+        "type": "sunburst",
+        "legend": {
+          "type": "table"
         }
       },
-      {
-        "id": 5110121017986846,
-        "definition": {
-          "title": "VMs Inventory",
-          "title_size": "16",
-          "title_align": "left",
-          "time": {
-            "type": "live",
-            "unit": "minute",
-            "value": 1
+      "layout": {
+        "x": 1,
+        "y": 3,
+        "width": 3,
+        "height": 3
+      }
+    },
+    {
+      "id": 6299919912115510,
+      "definition": {
+        "title": "Total VMs Memory",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_value",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_memoryCapacityInBytes{$vm_project, $cluster_name, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte_in_binary_bytes_family"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "autoscale": true,
+        "precision": 1,
+        "timeseries_background": {
+          "yaxis": {
+            "include_zero": true
           },
-          "type": "query_table",
-          "requests": [
-            {
-              "queries": [
+          "type": "area"
+        }
+      },
+      "layout": {
+        "x": 4,
+        "y": 3,
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "id": 8460896529176234,
+      "definition": {
+        "title": "Total VMs Memory Distribution Per Host",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_memoryCapacityInBytes{$cluster_name,$vm_project, $category} by {host_name}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "style": {
+              "palette": "datadog16"
+            },
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte_in_binary_bytes_family"
+                  }
+                },
+                "formula": "query1"
+              }
+            ],
+            "sort": {
+              "count": 500,
+              "order_by": [
                 {
-                  "data_source": "metrics",
-                  "name": "query1",
-                  "query": "max:logicinsight.pe.vms_numVCpus{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
-                  "aggregator": "last"
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "sunburst",
+        "legend": {
+          "type": "table"
+        }
+      },
+      "layout": {
+        "x": 5,
+        "y": 3,
+        "width": 3,
+        "height": 3
+      }
+    },
+    {
+      "id": 7360510782119058,
+      "definition": {
+        "title": "Total VMs Storage Assigned",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_value",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_diskCapacityInBytes{$vm_project,$cluster_name, $category}",
+                "aggregator": "last"
+              }
+            ],
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte_in_binary_bytes_family"
+                  }
+                },
+                "formula": "query1"
+              }
+            ]
+          }
+        ],
+        "autoscale": true,
+        "precision": 1,
+        "timeseries_background": {
+          "yaxis": {
+            "include_zero": true
+          },
+          "type": "area"
+        }
+      },
+      "layout": {
+        "x": 8,
+        "y": 3,
+        "width": 1,
+        "height": 3
+      }
+    },
+    {
+      "id": 7714504882382388,
+      "definition": {
+        "title": "Total VMs Storage Assigned Distribution Per Cluster",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "sum:logicinsight.pe.vms_diskCapacityInBytes{$vm_project, $cluster_name, $category} by {ntnx_cluster_name}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "style": {
+              "palette": "classic"
+            },
+            "formulas": [
+              {
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte_in_binary_bytes_family"
+                  }
+                },
+                "formula": "query1"
+              }
+            ],
+            "sort": {
+              "count": 500,
+              "order_by": [
+                {
+                  "type": "formula",
+                  "index": 0,
+                  "order": "desc"
+                }
+              ]
+            }
+          }
+        ],
+        "type": "sunburst",
+        "legend": {
+          "type": "table"
+        }
+      },
+      "layout": {
+        "x": 9,
+        "y": 3,
+        "width": 3,
+        "height": 3
+      }
+    },
+    {
+      "id": 5110121017986846,
+      "definition": {
+        "title": "VMs Inventory",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {
+          "type": "live",
+          "unit": "minute",
+          "value": 1
+        },
+        "type": "query_table",
+        "requests": [
+          {
+            "queries": [
+              {
+                "data_source": "metrics",
+                "name": "query1",
+                "query": "max:logicinsight.pe.vms_numVCpus{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query2",
+                "query": "max:logicinsight.pe.vms_memoryCapacityInBytes{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query3",
+                "query": "max:logicinsight.pe.vms_diskCapacityInBytes{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query6",
+                "query": "max:logicinsight.pe.vms_stats_controller_user_bytes{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query7",
+                "query": "max:logicinsight.pe.vms_numNetworkAdapters{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              },
+              {
+                "data_source": "metrics",
+                "name": "query8",
+                "query": "max:logicinsight.pe.vms_ngt_enabled{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
+                "aggregator": "last"
+              }
+            ],
+            "response_format": "scalar",
+            "text_formats": [
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "on"
+                  },
+                  "palette": "green_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "ON"
+                  }
                 },
                 {
-                  "data_source": "metrics",
-                  "name": "query2",
-                  "query": "max:logicinsight.pe.vms_memoryCapacityInBytes{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
-                  "aggregator": "last"
-                },
-                {
-                  "data_source": "metrics",
-                  "name": "query3",
-                  "query": "max:logicinsight.pe.vms_diskCapacityInBytes{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
-                  "aggregator": "last"
-                },
-                {
-                  "data_source": "metrics",
-                  "name": "query4",
-                  "query": "max:logicinsight.pe.vms_numNetworkAdapters{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
-                  "aggregator": "last"
-                },
-                {
-                  "data_source": "metrics",
-                  "name": "query5",
-                  "query": "max:logicinsight.pe.vms_ngt_enabled{$cluster_name,$host_name,$vm_pd,$vm_powerstate, $vm_project, $category} by {ntnx_cluster_name,vm_name,vm_powerstate,host_name,vm_ip_1,vm_pd,vm_project,category}",
-                  "aggregator": "last"
+                  "match": {
+                    "type": "is",
+                    "value": "off"
+                  },
+                  "palette": "red_on_white",
+                  "replace": {
+                    "type": "all",
+                    "with": "OFF"
+                  }
                 }
               ],
-              "response_format": "scalar",
-              "text_formats": [
-                [],
-                [],
-                [
+              [],
+              [],
+              [
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "entity_centric"
+                  },
+                  "palette": "black_on_light_green",
+                  "replace": {
+                    "type": "all",
+                    "with": "ENTITY CENTRIC"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "unprotected"
+                  },
+                  "palette": "black_on_light_red",
+                  "replace": {
+                    "type": "all",
+                    "with": "UNPROTECTED"
+                  }
+                },
+                {
+                  "match": {
+                    "type": "is",
+                    "value": "legacy"
+                  },
+                  "palette": "black_on_light_green",
+                  "replace": {
+                    "type": "all",
+                    "with": "PROTECTION DOMAIN"
+                  }
+                }
+              ]
+            ],
+            "sort": {
+              "order_by": [
+                {
+                  "type": "group",
+                  "name": "vm_name",
+                  "order": "asc"
+                }
+              ],
+              "count": 500
+            },
+            "formulas": [
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_VCPU",
+                "formula": "query1"
+              },
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_MEMORY",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query2"
+              },
+              {
+                "cell_display_mode": "bar",
+                "alias": "VM_STORAGE_ASSIGNED",
+                "number_format": {
+                  "unit": {
+                    "type": "canonical_unit",
+                    "unit_name": "byte"
+                  }
+                },
+                "formula": "query3"
+              },
+              {
+                "cell_display_mode": "number",
+                "alias": "VM_STORAGE_USAGE",
+                "formula": "query6"
+              },
+              {
+                "cell_display_mode": "number",
+                "alias": "VM_ADAPTERS",
+                "formula": "query7"
+              },
+              {
+                "conditional_formats": [
                   {
-                    "match": {
-                      "type": "is",
-                      "value": "on"
-                    },
-                    "palette": "green_on_white",
-                    "replace": {
-                      "type": "all",
-                      "with": "ON"
-                    }
+                    "comparator": "<=",
+                    "value": 0,
+                    "palette": "yellow_on_white"
                   },
                   {
-                    "match": {
-                      "type": "is",
-                      "value": "off"
-                    },
-                    "palette": "red_on_white",
-                    "replace": {
-                      "type": "all",
-                      "with": "OFF"
-                    }
+                    "comparator": ">",
+                    "value": 0,
+                    "palette": "green_on_white"
                   }
                 ],
-                [],
-                [],
-                [
-                  {
-                    "match": {
-                      "type": "is",
-                      "value": "entity_centric"
-                    },
-                    "palette": "black_on_light_green",
-                    "replace": {
-                      "type": "all",
-                      "with": "ENTITY CENTRIC"
-                    }
-                  },
-                  {
-                    "match": {
-                      "type": "is",
-                      "value": "unprotected"
-                    },
-                    "palette": "black_on_light_red",
-                    "replace": {
-                      "type": "all",
-                      "with": "UNPROTECTED"
-                    }
-                  },
-                  {
-                    "match": {
-                      "type": "is",
-                      "value": "legacy"
-                    },
-                    "palette": "black_on_light_green",
-                    "replace": {
-                      "type": "all",
-                      "with": "PROTECTION DOMAIN"
-                    }
-                  }
-                ]
-              ],
-              "sort": {
-                "order_by": [
-                  {
-                    "type": "group",
-                    "name": "vm_name",
-                    "order": "asc"
-                  }
-                ],
-                "count": 500
-              },
-              "formulas": [
-                {
-                  "cell_display_mode": "bar",
-                  "alias": "VM_VCPU",
-                  "formula": "query1"
-                },
-                {
-                  "cell_display_mode": "bar",
-                  "alias": "VM_MEMORY",
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte"
-                    }
-                  },
-                  "formula": "query2"
-                },
-                {
-                  "cell_display_mode": "bar",
-                  "alias": "VM_DISK",
-                  "number_format": {
-                    "unit": {
-                      "type": "canonical_unit",
-                      "unit_name": "byte"
-                    }
-                  },
-                  "formula": "query3"
-                },
-                {
-                  "cell_display_mode": "bar",
-                  "alias": "VM_ADAPTERS",
-                  "formula": "query4"
-                },
-                {
-                  "conditional_formats": [
-                    {
-                      "comparator": "=",
-                      "value": 0,
-                      "palette": "black_on_light_yellow"
-                    },
-                    {
-                      "comparator": "=",
-                      "value": 1,
-                      "palette": "black_on_light_green"
-                    }
-                  ],
-                  "cell_display_mode": "number",
-                  "alias": "VM_NGT",
-                  "formula": "query5"
-                }
-              ]
-            }
-          ],
-          "has_search_bar": "always",
-          "custom_links": [
-            {
-              "label": "VMs Protection Domain",
-              "link": "https://app.datadoghq.com/dashboard/7n9-nrf-66w/protection-domain?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
-            },
-            {
-              "label": "VMs single view",
-              "link": "https://app.datadoghq.com/dashboard/qx6-yn9-hvc/vms-single-view?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{$cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
-            }
-          ]
-        },
-        "layout": {
-          "x": 0,
-          "y": 6,
-          "width": 12,
-          "height": 7
-        }
+                "cell_display_mode": "number",
+                "alias": "VM_NGT",
+                "formula": "query8"
+              }
+            ]
+          }
+        ],
+        "has_search_bar": "always",
+        "custom_links": [
+          {
+            "label": "VMs Protection Domain",
+            "link": "https://app.datadoghq.com/dashboard/7n9-nrf-66w/protection-domain?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
+          },
+          {
+            "label": "VMs single view",
+            "link": "https://app.datadoghq.com/dashboard/qx6-yn9-hvc/vms-single-view?fromUser=false&refresh_mode=sliding&tpl_var_cluster_name[0]={{$cluster_name.value}}&tpl_var_vm_name[0]={{vm_name.value}}&live=true"
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 6,
+        "width": 12,
+        "height": 7
       }
-    ],
-    "template_variables": [
-      {
-        "name": "cluster_name",
-        "prefix": "ntnx_cluster_name",
-        "available_values": [],
-        "default": "*"
-      },
-      {
-        "name": "host_name",
-        "prefix": "host_name",
-        "available_values": [],
-        "default": "*"
-      },
-      {
-        "name": "vm_pd",
-        "prefix": "vm_pd",
-        "available_values": [],
-        "default": "*"
-      },
-      {
-        "name": "vm_powerstate",
-        "prefix": "vm_powerstate",
-        "available_values": [],
-        "default": "*"
-      },
-      {
-        "name": "vm_project",
-        "prefix": "vm_project",
-        "available_values": [],
-        "default": "*"
-      },
-      {
-        "name": "category",
-        "prefix": "category",
-        "available_values": [],
-        "default": "*"
-      }
-    ],
-    "layout_type": "ordered",
-    "notify_list": [],
-    "reflow_type": "fixed"
-  }
+    }
+  ],
+  "template_variables": [
+    {
+      "name": "cluster_name",
+      "prefix": "ntnx_cluster_name",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "host_name",
+      "prefix": "host_name",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "vm_project",
+      "prefix": "vm_project",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "category",
+      "prefix": "category",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "vm_powerstate",
+      "prefix": "vm_powerstate",
+      "available_values": [],
+      "default": "*"
+    },
+    {
+      "name": "vm_pd",
+      "prefix": "vm_pd",
+      "available_values": [],
+      "default": "*"
+    }
+  ],
+  "layout_type": "ordered",
+  "notify_list": [],
+  "reflow_type": "fixed"
+}
