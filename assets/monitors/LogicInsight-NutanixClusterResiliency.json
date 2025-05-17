@@ -5,7 +5,7 @@
 	"query": "avg(last_5m):(avg:logicinsight.pe.cluster_usage_stats_storage.usage_bytes{source:logicapp_nutanix_pe} by {ntnx_cluster_name} / avg:logicinsight.pe.cluster_data_resiliency{source:logicapp_nutanix_pe} by {ntnx_cluster_name}) * 100 > 90",
 	"message": "{{#is_alert}} \n\nResiliency status: The cluster's resiliency is approaching critical levels.\n\nThis event indicates that the cluster is utilizing a significant portion of its capacity reserved for maintaining data redundancy.\n\nThreshold context:\n\n1. Above 90%: The cluster is nearing its resiliency threshold — This is a warning that if usage reaches 100%, the cluster will lose its ability to maintain full resiliency, which can be potentially dangerous in case of a node or disk failure.\n2. Above 75%: The resiliency level is moderately degraded — It is recommended to evaluate the current storage usage and plan corrective actions to avoid reaching critical thresholds.\n\nSuggested next steps:\n\n- Assess current disk utilization and free up space if possible.\n- Consider expanding cluster capacity to restore resiliency headroom.\n- Investigate recent hardware failures or rebalancing delays.\n- Ensure replication and redundancy tasks are progressing as expected.\n\nTaking early action will help preserve fault tolerance and avoid disruptions in case of unexpected failures.\n\n{{/is_alert}}\n\n{{#is_recovery}} \n\nResiliency has returned to a healthy state.\n\nThe cluster is once again operating with sufficient redundancy and protection mechanisms in place.  \nGood work ensuring the environment remains resilient!\n\n{{/is_recovery}}",
 	"tags": [
-		"LOGICAPP_VERSION_2025.04.08.2326"
+		"LOGICAPP_VERSION_2025.05.15.2300"
 	],
 	"options": {
 		"thresholds": {
@@ -13,7 +13,7 @@
 			"warning": 75
 		},
 		"notify_audit": false,
-		"on_missing_data": "default",
+		"on_missing_data": "show_no_data",
 		"include_tags": true,
 		"new_group_delay": 60,
 		"renotify_interval": 0,
