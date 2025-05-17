@@ -1,7 +1,7 @@
 {
 	"version": 2,
-	"created_at": "2025-04-15",
-	"last_updated_at": "2025-04-15",
+	"created_at": "2025-05-15",
+	"last_updated_at": "2025-05-15",
 	"title": "System detected unprotected virtual machines",
 	"description": "Detects VMs not assigned to Protection Domains or Policies. Helps ensure all workloads are covered by backup and replication plans.",
 	"definition": {
@@ -12,7 +12,7 @@
 		"message": "Unprotected VMs Monitor:\n\nValidate cluster {{cluster_name}} \n\n{{#is_alert}} \nStatus: There are virtual machines (VMs) without Protection Domains or Protection Policies.\n\nTo resolve this issue, follow these corrective actions:\n  1. Identify the unprotected VMs in Prism Central / Prism Element.\n  2. Ensure that each VM is assigned to a Protection Domain or a Protection Policy.\n  3. Create a Protection Domain and configure backup schedules for critical VMs.\n  4. Verify that replication policies are set up correctly and operational.\n  5. Review the recovery point objectives (RPO) and ensure they are being met.\n  \n{{/is_alert}}\n\n{{#is_recovery}} \nAll VMs are now properly protected. Great job!\n{{/is_recovery}}",
 		"tags": [
 			"PD_UNPROTECTED",
-			"LOGICAPP_VERSION_2025.04.08.2326"
+			"LOGICAPP_VERSION_2025.05.15.2300"
 		],
 		"options": {
 			"thresholds": {

@@ -1,7 +1,7 @@
 {
 	"version": 2,
-	"created_at": "2025-04-15",
-	"last_updated_at": "2025-04-15",
+	"created_at": "2025-05-15",
+	"last_updated_at": "2025-05-15",
 	"title": "System detected pending snapshot replication",
 	"description": "Detects when one or more VM snapshots are pending replication in Nutanix Protection Domains. Helps ensure backup and disaster recovery processes remain functional.",
 	"definition": {
@@ -9,10 +9,10 @@
 		"name": "LogicInsight - Nutanix Pending VM Detected",
 		"type": "query alert",
 		"query": "avg(last_5m):avg:logicinsight.pe.pd_vm_pending{source:logicapp_nutanix_pe} by {pd_vm_name,ntnx_cluster_name} == 1",
-		"message": "{{#is_alert}}\n\nAlert: One or more Nutanix snapshots are pending replication!\n\nA pending snapshot has been detected in one of the Protection Domains (PDs) on the Nutanix cluster.  \nThis typically means that one or more snapshots have not yet been successfully replicated to the remote site.\n\nPending VM Snapshot: `{{pd_vm_name}}`\n\nThis condition may occur due to:\n1. Temporary network latency or slowness.\n2. Disconnection between the source and destination clusters.\n3. Insufficient bandwidth for replication traffic.\n4. High load on the system delaying snapshot processing.\n\nRecommended actions:\n1. Log in to the Nutanix management console and navigate to Data Protection > Protection Domains.\n2. Verify which snapshots are in \"pending\" status and since when.\n3. Check network connectivity and bandwidth between the involved sites.\n4. Review system performance and running tasks that may affect replication.\n5. If needed, manually trigger the replication or consult logs for more detail.\n\nMonitoring these pending states helps ensure that your backup and DR plans remain fully functional.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nRecovery: All Nutanix snapshot replications are back to normal.\n\nNo pending snapshots are currently detected in the Protection Domains.  \nAll VMs are replicating correctly between sites and the data protection process is fully operational.\n\n{{/is_recovery}}",
+		"message": "{{#is_alert}}\n\nAlert: One or more Nutanix snapshots are pending replication!\n\nA pending snapshot has been detected in one of the Protection Domains (PDs) on the Nutanix cluster.  \nThis typically means that one or more snapshots have not yet been successfully replicated to the remote site.\n\nPending VM Snapshot: `{{pd_vm_name}}`\n\nThis condition may occur due to:\n1. Temporary network latency or slowness.\n2. Disconnection between the source and destination clusters.\n3. Insufficient bandwidth for replication traffic.\n4. High load on the system delaying snapshot processing.\n\nRecommended actions:\n1. Log in to the Nutanix management console and navigate to Data Protection > Protection Domains.\n2. Verify which snapshots are in \"pending\" status and since when.\n3. Check network connectivity and bandwidth between the involved sites.\n4. Review system performance and running tasks that may affect replication.\n5. If needed, manually trigger the replication or consult logs for more detail.\n\nMonitoring these pending states helps ensure that your backup and DR plans remain fully functional.\n\n{{/is_alert}}\n\n{{#is_recovery}}\n\nRecovery: All Nutanix snapshot replications are back to normal\n\nNo pending snapshots are currently detected in the Protection Domains.  \nAll VMs are replicating correctly between sites and the data protection process is fully operational.\n\n{{/is_recovery}}",
 		"tags": [
 			"PD_PENDING",
-			"LOGICAPP_VERSION_2025.04.08.2326"
+			"LOGICAPP_VERSION_2025.05.15.2300"
 		],
 		"options": {
 			"thresholds": {
