@@ -1,6 +1,6 @@
 {
   "title": "LogicInsight - Redfish Single Overview",
-  "description": "### **📊 LogicInsight - Redfish Single overview Dashboard Explanation**\n\nThe **LogicInsight - Redfish Host Monitoring Dashboard** provides a **real-time hardware health and power consumption overview** of all servers reporting via Redfish API. This dashboard is designed to monitor **temperature sensors, power supply units, and CPU metrics**, as well as visualize **system board power usage trends**.\n\n## **1️⃣ Hardware Health Overview (Green Section - Left)**\n\nThis section summarizes the **operational status and health of servers**:\n\n- **Global Server Status** – Displays if the server is in a normal state.\n- **Server Power Status** – Displays the current power state of the servers: `0` indicates the server is **powered ON**, and `1` indicates the server is **powered OFF**.\n-   **PSU Bay 1 & Bay 2 Status** – Shows the health of both Power Supply Units.\n-   **CPU Count** – Reflects the average CPU count across all servers.\n-   **PSU Capacity** – Displays the total power capacity being delivered (in Watts).\n-   **Servers Table** – Lists UUIDs, models, hostnames, serial numbers, and Redfish statuses for each monitored server.\n\n✔ **Why It’s Important?**\nAllows administrators to verify **power supply stability, CPU availability, and individual server status** at a glance.\n\n***\n\n## **2️⃣ Temperature Monitoring (Blue Section - Middle)**\n\nThis section gives a **comprehensive look into thermal performance** per server component:\n\n-   **CPU Temp** – Shows current CPU temperature readings.\n-   **System Board Temp** – Displays various board-related temperatures like `pch_temp`, `peripheral_temp`, `mrvl_temp`, `ps1_inlet_temp`, and others.\n-   **Memory Temp** – Includes DIMM module temperature sensors.\n-   **Storage Device Temp** – Tracks temperature on key storage components such as `aoc_sas0_5`, `m2ssd_temp`, etc.\n\n✔ **Why It’s Important?**\nThermal monitoring is essential to prevent **hardware damage and performance throttling** caused by overheating.\n\n***\n\n## **3️⃣ Power Consumption Monitoring (Purple Section - Right)**\n\nThis section visualizes **power consumption patterns** over time:\n\n-   **System Board Power Consumption Graph** – A time-series line chart showing power usage (in Watts) per host, with color-coded lines for each server.\n-   **Legend with Current Values** – Provides stats like **average (AVG)**, **minimum (MIN)**, **maximum (MAX)**, **sum**, and **latest value** per host IP.\n\n✔ **Why It’s Important?**\\\nThis graph helps identify **power spikes, usage anomalies, or inefficient servers** that may require attention or optimization.\n\n***\n\n### **📌 Why This Dashboard Matters?**\n\n✅ **Hardware Health Monitoring** – Instantly detect PSU, CPU, or sensor failures.\\\n✅ **Temperature Awareness** – Avoid thermal issues that can lead to downtime or equipment damage.\\\n✅ **Energy Efficiency Insights** – Track energy usage trends to plan for scaling, cost optimization, or cooling needs.\\\n✅ **Centralized View** – Easily monitor multiple servers from a single interface using the Redfish API.",
+  "description": "### **📊 gicInsight - Redfish Single overview Dashboard Explanation**\n\nThe **LogicInsight - Redfish Host Monitoring Dashboard** provides a **real-time hardware health and power consumption overview** of all servers reporting via Redfish API. This dashboard is designed to monitor **temperature sensors, power supply units, and CPU metrics**, as well as visualize **system board power usage trends**.\n\n## **1️⃣ Hardware Health Overview (Green Section - Left)**\n\nThis section summarizes the **operational status and health of servers**:\n\n- **Global Server Status** – Displays if the server is in a normal state.\n- **Server Power Status** – Displays the current power state of the servers: `0` indicates the server is **powered ON**, and `1` indicates the server is **powered OFF**.\n-   **PSU Bay 1 & Bay 2 Status** – Shows the health of both Power Supply Units.\n-   **CPU Count** – Reflects the average CPU count across all servers.\n-   **PSU Capacity** – Displays the total power capacity being delivered (in Watts).\n-   **Servers Table** – Lists UUIDs, models, hostnames, serial numbers, and Redfish statuses for each monitored server.\n\n✔ **Why It’s Important?**\nAllows administrators to verify **power supply stability, CPU availability, and individual server status** at a glance.\n\n***\n\n## **2️⃣ Temperature Monitoring (Blue Section - Middle)**\n\nThis section gives a **comprehensive look into thermal performance** per server component:\n\n-   **CPU Temp** – Shows current CPU temperature readings.\n-   **System Board Temp** – Displays various board-related temperatures like `pch_temp`, `peripheral_temp`, `mrvl_temp`, `ps1_inlet_temp`, and others.\n-   **Memory Temp** – Includes DIMM module temperature sensors.\n-   **Storage Device Temp** – Tracks temperature on key storage components such as `aoc_sas0_5`, `m2ssd_temp`, etc.\n\n✔ **Why It’s Important?**\nThermal monitoring is essential to prevent **hardware damage and performance throttling** caused by overheating.\n\n***\n\n## **3️⃣ Power Consumption Monitoring (Purple Section - Right)**\n\nThis section visualizes **power consumption patterns** over time:\n\n-   **System Board Power Consumption Graph** – A time-series line chart showing power usage (in Watts) per host, with color-coded lines for each server.\n-   **Legend with Current Values** – Provides stats like **average (AVG)**, **minimum (MIN)**, **maximum (MAX)**, **sum**, and **latest value** per host IP.\n\n✔ **Why It’s Important?**\\\nThis graph helps identify **power spikes, usage anomalies, or inefficient servers** that may require attention or optimization.\n\n***\n\n### **📌 Why This Dashboard Matters?**\n\n✅ **Hardware Health Monitoring** – Instantly detect PSU, CPU, or sensor failures.\\\n✅ **Temperature Awareness** – Avoid thermal issues that can lead to downtime or equipment damage.\\\n✅ **Energy Efficiency Insights** – Track energy usage trends to plan for scaling, cost optimization, or cooling needs.\\\n✅ **Centralized View** – Easily monitor multiple servers from a single interface using the Redfish API.",
   "widgets": [
     {
       "id": 123996285156608,
@@ -32,12 +32,9 @@
           {
             "id": 1633047886301920,
             "definition": {
-              "title": "IPMI Global Status",
+              "title": "IPMI Global Server Status",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "live_span": "10m"
-              },
               "type": "check_status",
               "check": "logicinsight.pe.redfish_ipmi_status",
               "grouping": "cluster",
@@ -61,9 +58,6 @@
               "title": "IPMI Memory Status",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "live_span": "10m"
-              },
               "type": "check_status",
               "check": "logicinsight.pe.redfish_mem_status",
               "grouping": "cluster",
@@ -87,9 +81,6 @@
               "title": "IPMI Power Status",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "live_span": "10m"
-              },
               "type": "check_status",
               "check": "logicinsight.pe.redfish_power_state_status",
               "grouping": "cluster",
@@ -113,9 +104,6 @@
               "title": "IPMI CPU Status",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "live_span": "10m"
-              },
               "type": "check_status",
               "check": "logicinsight.pe.redfish_cpu_status",
               "grouping": "cluster",
@@ -139,11 +127,6 @@
               "title": "Server",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "type": "live",
-                "unit": "hour",
-                "value": 1
-              },
               "type": "query_table",
               "requests": [
                 {
@@ -215,23 +198,18 @@
               "title": "Cluster Total Power Consumption",
               "title_size": "16",
               "title_align": "left",
-              "time": {
-                "type": "live",
-                "unit": "minute",
-                "value": 1
-              },
               "type": "query_value",
               "requests": [
                 {
                   "formulas": [
                     {
-                      "formula": "query4",
                       "number_format": {
                         "unit": {
                           "type": "canonical_unit",
                           "unit_name": "watt"
                         }
-                      }
+                      },
+                      "formula": "query4"
                     }
                   ],
                   "queries": [
@@ -239,7 +217,7 @@
                       "data_source": "metrics",
                       "name": "query4",
                       "query": "sum:logicinsight.pe.redfish_psu_PowerConsumedWatts{$cluster_name}",
-                      "aggregator": "avg"
+                      "aggregator": "last"
                     }
                   ],
                   "response_format": "scalar"
@@ -428,7 +406,7 @@
           {
             "id": 5240153413852990,
             "definition": {
-              "title": "Global Server Status",
+              "title": "Server Status",
               "title_size": "16",
               "title_align": "left",
               "type": "check_status",
@@ -506,56 +484,6 @@
             }
           },
           {
-            "id": 3715773590645328,
-            "definition": {
-              "title": "PSU Bay 1 | 0 (OK) ",
-              "title_size": "16",
-              "title_align": "left",
-              "type": "query_value",
-              "requests": [
-                {
-                  "response_format": "scalar",
-                  "queries": [
-                    {
-                      "data_source": "metrics",
-                      "name": "query1",
-                      "query": "avg:logicinsight.pe.redfish_psu_status{psu_name:power_supply_bay_1,$host_redfish, $cluster_name}",
-                      "aggregator": "last"
-                    }
-                  ],
-                  "conditional_formats": [
-                    {
-                      "comparator": "=",
-                      "value": 0,
-                      "palette": "white_on_green"
-                    },
-                    {
-                      "comparator": "<=",
-                      "value": 1,
-                      "palette": "white_on_red"
-                    }
-                  ],
-                  "formulas": [
-                    {
-                      "formula": "query1"
-                    }
-                  ]
-                }
-              ],
-              "autoscale": true,
-              "precision": 2,
-              "timeseries_background": {
-                "type": "area"
-              }
-            },
-            "layout": {
-              "x": 0,
-              "y": 2,
-              "width": 2,
-              "height": 1
-            }
-          },
-          {
             "id": 3077065549109626,
             "definition": {
               "time": {
@@ -586,10 +514,6 @@
                         "unit": {
                           "type": "canonical_unit",
                           "unit_name": "watt"
-                        },
-                        "unit_scale": {
-                          "type": "canonical_unit",
-                          "unit_name": "kilowatt"
                         }
                       }
                     }
@@ -598,9 +522,9 @@
               ]
             },
             "layout": {
-              "x": 2,
+              "x": 0,
               "y": 2,
-              "width": 2,
+              "width": 3,
               "height": 2
             }
           },
@@ -641,74 +565,18 @@
               }
             },
             "layout": {
-              "x": 4,
+              "x": 3,
               "y": 2,
-              "width": 2,
+              "width": 3,
               "height": 2
             }
           },
           {
-            "id": 5022493400506076,
+            "id": 3715773590645328,
             "definition": {
-              "title": "PSU Bay 2 | 0 (OK)",
+              "title": "PSU Bay 1 | 0 (OK) ",
               "title_size": "16",
               "title_align": "left",
-              "type": "query_value",
-              "requests": [
-                {
-                  "response_format": "scalar",
-                  "queries": [
-                    {
-                      "data_source": "metrics",
-                      "name": "query1",
-                      "query": "avg:logicinsight.pe.redfish_psu_status{psu_name:power_supply_bay_2,$host_redfish, $cluster_name}",
-                      "aggregator": "last"
-                    }
-                  ],
-                  "conditional_formats": [
-                    {
-                      "comparator": "=",
-                      "value": 0,
-                      "palette": "white_on_green"
-                    },
-                    {
-                      "comparator": "<=",
-                      "value": 1,
-                      "palette": "white_on_red"
-                    }
-                  ],
-                  "formulas": [
-                    {
-                      "formula": "query1"
-                    }
-                  ]
-                }
-              ],
-              "autoscale": true,
-              "text_align": "center",
-              "precision": 0,
-              "timeseries_background": {
-                "type": "area"
-              }
-            },
-            "layout": {
-              "x": 0,
-              "y": 3,
-              "width": 2,
-              "height": 1
-            }
-          },
-          {
-            "id": 5604064282507888,
-            "definition": {
-              "title": "Server $host_redfish",
-              "title_size": "16",
-              "title_align": "left",
-              "time": {
-                "type": "live",
-                "unit": "hour",
-                "value": 1
-              },
               "type": "query_table",
               "requests": [
                 {
@@ -716,7 +584,7 @@
                     {
                       "data_source": "metrics",
                       "name": "query1",
-                      "query": "avg:logicinsight.pe.redfish_global_powerstate_status{$cluster_name, $host_redfish} by {uuid,model,host_redfish,serial_number}",
+                      "query": "avg:logicinsight.pe.redfish_psu_status{$host_redfish, $cluster_name} by {psu_name,serial_number,oem,model,psu_firmware}",
                       "aggregator": "last"
                     }
                   ],
@@ -735,12 +603,17 @@
                     {
                       "conditional_formats": [
                         {
-                          "comparator": "<=",
+                          "comparator": "=",
                           "value": 0,
-                          "palette": "black_on_light_green"
+                          "palette": "white_on_green"
+                        },
+                        {
+                          "comparator": "=",
+                          "value": 1,
+                          "palette": "white_on_red"
                         }
                       ],
-                      "cell_display_mode": "bar",
+                      "cell_display_mode": "number",
                       "alias": "STATUS",
                       "formula": "query1"
                     }
@@ -760,7 +633,7 @@
       },
       "layout": {
         "x": 0,
-        "y": 1,
+        "y": 0,
         "width": 6,
         "height": 7
       }
@@ -958,7 +831,7 @@
       },
       "layout": {
         "x": 6,
-        "y": 1,
+        "y": 0,
         "width": 6,
         "height": 7
       }
